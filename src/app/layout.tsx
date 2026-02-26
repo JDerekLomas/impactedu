@@ -22,6 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://impact-edu.ai"),
   title: {
     default: "Impact-Edu.ai — Research & Tools for AI in Education",
     template: "%s | Impact-Edu.ai",
@@ -35,6 +36,12 @@ export const metadata: Metadata = {
     url: "https://impact-edu.ai",
     siteName: "Impact-Edu.ai",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Impact-Edu.ai — Research & Tools for AI in Education",
+    description:
+      "Open research, open tools, and practitioner training for equitable AI in education.",
   },
 };
 

@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import LogoStrip from "@/components/LogoStrip";
 import Link from "next/link";
 
 const researchAreas = [
@@ -186,6 +187,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <LogoStrip />
 
       {/* Research heritage */}
       <section className="py-16">
