@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useParams } from "next/navigation";
 
 interface Message {
@@ -32,8 +32,11 @@ export default function InterviewPage() {
   const [studyTitle, setStudyTitle] = useState("");
   const [sessionStatus, setSessionStatus] = useState("active");
   const [streamingText, setStreamingText] = useState("");
+  const [voiceEnabled, setVoiceEnabled] = useState(false);
+  const [speaking, setSpeaking] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     loadSession();
@@ -42,6 +45,58 @@ export default function InterviewPage() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, streamingText]);
+
+  // Clean up audio on unmount
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  const speakText = useCallback(async (text: string) => {
+    if (!voiceEnabled) return;
+    setSpeaking(true);
+    try {
+      const res = await fetch("/api/interview/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      if (!res.ok) {
+        console.error("TTS failed:", res.status);
+        return;
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      audioRef.current = audio;
+      audio.onended = () => {
+        URL.revokeObjectURL(url);
+        setSpeaking(false);
+        audioRef.current = null;
+      };
+      audio.onerror = () => {
+        URL.revokeObjectURL(url);
+        setSpeaking(false);
+        audioRef.current = null;
+      };
+      await audio.play();
+    } catch (err) {
+      console.error("TTS error:", err);
+      setSpeaking(false);
+    }
+  }, [voiceEnabled]);
+
+  function stopSpeaking() {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+      setSpeaking(false);
+    }
+  }
 
   async function loadSession() {
     try {
@@ -132,6 +187,8 @@ export default function InterviewPage() {
             },
           ]);
           setStreamingText("");
+          // Speak the response if voice is enabled
+          speakText(accumulated);
         }
       }
     } catch (err) {
@@ -195,6 +252,7 @@ export default function InterviewPage() {
             },
           ]);
           setStreamingText("");
+          speakText(accumulated);
         }
       }
 
@@ -243,15 +301,50 @@ export default function InterviewPage() {
                 : "Interview complete"}
             </p>
           </div>
-          {sessionStatus === "active" && (
-            <button
-              onClick={endInterview}
-              disabled={sending}
-              className="px-4 py-1.5 text-sm rounded border border-border text-muted hover:text-foreground hover:border-foreground transition-colors disabled:opacity-50"
-            >
-              End Interview
-            </button>
-          )}
+          <div className="flex items-center gap-3">
+            {sessionStatus === "active" && (
+              <>
+                <button
+                  onClick={() => {
+                    if (voiceEnabled) stopSpeaking();
+                    setVoiceEnabled(!voiceEnabled);
+                  }}
+                  className={`p-2 rounded-lg border transition-colors ${
+                    voiceEnabled
+                      ? "border-accent bg-accent/10 text-accent"
+                      : "border-border text-muted hover:text-foreground hover:border-foreground"
+                  }`}
+                  title={voiceEnabled ? "Voice on — click to mute" : "Voice off — click to enable"}
+                >
+                  {speaking ? (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                    </svg>
+                  ) : voiceEnabled ? (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    </svg>
+                  ) : (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                      <line x1="23" y1="9" x2="17" y2="15" />
+                      <line x1="17" y1="9" x2="23" y2="15" />
+                    </svg>
+                  )}
+                </button>
+                <button
+                  onClick={endInterview}
+                  disabled={sending}
+                  className="px-4 py-1.5 text-sm rounded border border-border text-muted hover:text-foreground hover:border-foreground transition-colors disabled:opacity-50"
+                >
+                  End Interview
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </div>
 
