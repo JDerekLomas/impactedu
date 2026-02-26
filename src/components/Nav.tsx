@@ -10,6 +10,7 @@ const links = [
   { href: "/openitems", label: "Open Items" },
   { href: "/work", label: "Work" },
   { href: "/programs", label: "Programs" },
+  { href: "/tools/difficulty-estimator", label: "Tools" },
   { href: "/blog", label: "Blog" },
   { href: "/ops", label: "Ops" },
   { href: "/contact", label: "Contact" },
@@ -36,7 +37,7 @@ export default function Nav() {
                 key={link.href}
                 href={link.href}
                 className={`px-3 py-1.5 rounded text-sm transition-colors ${
-                  pathname === link.href
+                  pathname === link.href || (link.href.startsWith("/tools") && pathname.startsWith("/tools"))
                     ? "text-foreground font-medium"
                     : "text-muted hover:text-foreground"
                 }`}
@@ -70,7 +71,7 @@ export default function Nav() {
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
                 className={`block px-3 py-2 text-sm ${
-                  pathname === link.href
+                  pathname === link.href || (link.href.startsWith("/tools") && pathname.startsWith("/tools"))
                     ? "text-foreground font-medium"
                     : "text-muted hover:text-foreground"
                 }`}
