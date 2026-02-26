@@ -16,10 +16,8 @@ export default function Hero() {
               in an AI age?
               <Doodle
                 type="underline"
-                width={220}
-                height={16}
-                seed={42}
-                className="absolute -bottom-1 left-0 w-full"
+                delay={600}
+                className="absolute -bottom-1 left-0 w-full h-[10px]"
               />
             </span>
           </h1>

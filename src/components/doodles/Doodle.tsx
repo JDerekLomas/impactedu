@@ -1,147 +1,97 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import rough from "roughjs";
 
-type DoodleType =
-  | "underline"
-  | "circle"
-  | "arrow"
-  | "quotes"
-  | "star"
-  | "bracket";
+/**
+ * Hand-crafted SVG doodles — confident pen strokes with intentional imperfection.
+ * Each path is a manually tuned bezier curve, not generated noise.
+ * Animated with stroke-dasharray to "draw in" on mount.
+ */
+
+type DoodleType = "underline" | "circle" | "arrow" | "bracket";
 
 interface DoodleProps {
   type: DoodleType;
-  width?: number;
-  height?: number;
   color?: string;
-  seed?: number;
+  strokeWidth?: number;
   className?: string;
+  animate?: boolean;
+  delay?: number;
 }
+
+const paths: Record<DoodleType, { d: string; viewBox: string }> = {
+  underline: {
+    // Confident wavy line — subtle vertical variation (2-3px)
+    d: "M 2 6 Q 30 2, 55 5.5 T 110 4 T 165 6 T 198 3.5",
+    viewBox: "0 0 200 10",
+  },
+  circle: {
+    // Imperfect ellipse — doesn't quite close, like a quick annotation
+    d: "M 52 4 C 78 2, 96 12, 96 28 C 96 44, 74 56, 48 56 C 22 56, 4 44, 4 28 C 4 14, 18 4, 44 3",
+    viewBox: "0 0 100 60",
+  },
+  arrow: {
+    // Confident horizontal arrow — slight curve, sharp head
+    d: "M 4 16 Q 40 13, 80 15 T 156 14 M 142 6 L 160 14 L 140 24",
+    viewBox: "0 0 164 30",
+  },
+  bracket: {
+    // Curly bracket — like a margin annotation
+    d: "M 16 2 C 4 8, 2 20, 8 32 C 2 44, 4 56, 16 62",
+    viewBox: "0 0 20 64",
+  },
+};
 
 export default function Doodle({
   type,
-  width = 100,
-  height = 40,
   color = "var(--accent)",
-  seed = 1,
+  strokeWidth = 2,
   className = "",
+  animate = true,
+  delay = 0,
 }: DoodleProps) {
-  const svgRef = useRef<SVGSVGElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
 
   useEffect(() => {
-    const svg = svgRef.current;
-    if (!svg) return;
+    const path = pathRef.current;
+    if (!path || !animate) return;
 
-    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = `${length}`;
+    path.style.strokeDashoffset = `${length}`;
 
-    const rc = rough.svg(svg);
-    const opts = { stroke: color, roughness: 1.5, seed };
-
-    switch (type) {
-      case "underline":
-        svg.appendChild(
-          rc.line(4, height * 0.7, width - 4, height * 0.6, {
-            ...opts,
-            strokeWidth: 2,
-            bowing: 3,
-          })
-        );
-        break;
-
-      case "circle":
-        svg.appendChild(
-          rc.ellipse(width / 2, height / 2, width - 12, height - 12, {
-            ...opts,
-            strokeWidth: 1.5,
-            roughness: 2,
-            fill: "none",
-          })
-        );
-        break;
-
-      case "arrow": {
-        const mid = height / 2;
-        svg.appendChild(
-          rc.line(8, mid, width - 16, mid, {
-            ...opts,
-            strokeWidth: 1.5,
-          })
-        );
-        svg.appendChild(
-          rc.line(width - 22, mid - 7, width - 10, mid, {
-            ...opts,
-            strokeWidth: 1.5,
-            roughness: 1,
-          })
-        );
-        svg.appendChild(
-          rc.line(width - 22, mid + 7, width - 10, mid, {
-            ...opts,
-            strokeWidth: 1.5,
-            roughness: 1,
-          })
-        );
-        break;
-      }
-
-      case "quotes": {
-        // Opening quotation mark — two small curved strokes
-        const draw = (x: number) => {
-          svg.appendChild(
-            rc.path(
-              `M ${x + 8} ${height * 0.2} C ${x + 6} ${height * 0.5}, ${x} ${height * 0.6}, ${x + 2} ${height * 0.75}`,
-              { ...opts, strokeWidth: 2, roughness: 1.2 }
-            )
-          );
-        };
-        draw(width * 0.2);
-        draw(width * 0.5);
-        break;
-      }
-
-      case "star": {
-        const cx = width / 2;
-        const cy = height / 2;
-        const r = Math.min(width, height) / 2 - 5;
-        const points: [number, number][] = [];
-        for (let i = 0; i < 10; i++) {
-          const angle = (Math.PI / 5) * i - Math.PI / 2;
-          const rad = i % 2 === 0 ? r : r * 0.38;
-          points.push([
-            cx + rad * Math.cos(angle),
-            cy + rad * Math.sin(angle),
-          ]);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          path.style.transition = `stroke-dashoffset 0.8s ease ${delay}ms`;
+          path.style.strokeDashoffset = "0";
+          observer.unobserve(entry.target);
         }
-        svg.appendChild(
-          rc.polygon(points, {
-            ...opts,
-            strokeWidth: 1.5,
-            fill: "none",
-          })
-        );
-        break;
-      }
+      },
+      { threshold: 0.5 }
+    );
 
-      case "bracket":
-        svg.appendChild(
-          rc.path(
-            `M ${width - 4} 6 C ${8} ${height * 0.15}, ${8} ${height * 0.85}, ${width - 4} ${height - 6}`,
-            { ...opts, strokeWidth: 1.5, roughness: 1.8, fill: "none" }
-          )
-        );
-        break;
-    }
-  }, [type, width, height, color, seed]);
+    observer.observe(path);
+    return () => observer.disconnect();
+  }, [animate, delay]);
+
+  const { d, viewBox } = paths[type];
 
   return (
     <svg
-      ref={svgRef}
-      width={width}
-      height={height}
+      viewBox={viewBox}
+      fill="none"
       className={className}
       aria-hidden="true"
-    />
+    >
+      <path
+        ref={pathRef}
+        d={d}
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
