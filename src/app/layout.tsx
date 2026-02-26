@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Source_Serif_4, JetBrains_Mono } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import InputWidget from "@/components/InputWidget";
 import "./globals.css";
 
 const inter = Inter({
@@ -58,6 +59,7 @@ export default function RootLayout({
         <Nav />
         <main className="min-h-screen">{children}</main>
         <Footer />
+        <InputWidget allowedHosts={["localhost", "vercel.app"]} />
       </body>
     </html>
   );
