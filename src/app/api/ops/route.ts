@@ -5,6 +5,15 @@ export const dynamic = "force-dynamic";
 const REPO = "JDerekLomas/impactedu";
 const GITHUB_API = "https://api.github.com";
 
+const OPS_LABELS = new Set([
+  "grant",
+  "partnership",
+  "research",
+  "hiring",
+  "infrastructure",
+  "ops",
+]);
+
 async function ghFetch(path: string) {
   const headers: Record<string, string> = {
     Accept: "application/vnd.github+json",
@@ -25,33 +34,38 @@ async function ghFetch(path: string) {
   return res.json();
 }
 
+interface GHLabel {
+  name: string;
+  color: string;
+  description?: string;
+}
+
+interface GHIssue {
+  number: number;
+  pull_request?: unknown;
+  labels: GHLabel[];
+}
+
 export async function GET() {
   try {
-    // Use search API for OR-based label matching (single request instead of 6)
-    const labelQuery = [
-      "grant",
-      "partnership",
-      "research",
-      "hiring",
-      "infrastructure",
-      "ops",
-    ]
-      .map((l) => `label:${l}`)
-      .join("+");
-
-    const [searchResult, milestones] = await Promise.all([
+    // Fetch all issues + milestones (small repo, < 100 issues)
+    const [allIssues, milestones] = await Promise.all([
       ghFetch(
-        `/search/issues?q=repo:${REPO}+is:issue+${labelQuery}&per_page=100&sort=created&order=asc`
+        `/repos/${REPO}/issues?state=all&per_page=100&sort=created&direction=asc`
       ),
       ghFetch(
         `/repos/${REPO}/milestones?state=open&sort=due_on&direction=asc`
       ),
     ]);
 
-    return NextResponse.json({
-      issues: searchResult.items ?? [],
-      milestones,
-    });
+    // Filter to ops-labeled issues (not PRs)
+    const issues = (allIssues as GHIssue[]).filter(
+      (i) =>
+        !i.pull_request &&
+        i.labels.some((l) => OPS_LABELS.has(l.name))
+    );
+
+    return NextResponse.json({ issues, milestones });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
     return NextResponse.json({ error: message }, { status: 500 });
