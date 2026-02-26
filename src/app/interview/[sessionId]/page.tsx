@@ -69,6 +69,8 @@ export default function InterviewPage() {
   const [voiceMessages, setVoiceMessages] = useState<Array<{ source: string; text: string }>>([]);
   const [voiceConnecting, setVoiceConnecting] = useState(false);
   const studyDataRef = useRef<SessionData["session"]["interview_studies"] | null>(null);
+  const voiceMessagesRef = useRef<Array<{ source: string; text: string }>>([]);
+  const voiceSavedRef = useRef(false);
 
   const conversation = useConversation({
     onConnect: () => {
@@ -79,7 +81,11 @@ export default function InterviewPage() {
       saveVoiceTranscript();
     },
     onMessage: ({ message, source }) => {
-      setVoiceMessages((prev) => [...prev, { source, text: message }]);
+      setVoiceMessages((prev) => {
+        const next = [...prev, { source, text: message }];
+        voiceMessagesRef.current = next;
+        return next;
+      });
     },
     onError: (error) => {
       console.error("Voice error:", error);
@@ -94,6 +100,30 @@ export default function InterviewPage() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, streamingText, voiceMessages]);
+
+  // Save voice transcript on tab close / navigate away
+  useEffect(() => {
+    if (mode !== "voice") return;
+
+    const handleBeforeUnload = () => {
+      const msgs = voiceMessagesRef.current;
+      if (msgs.length === 0 || voiceSavedRef.current) return;
+      const transcript = msgs.map((m) => ({
+        role: m.source === "ai" ? "assistant" : "user",
+        content: m.text,
+      }));
+      navigator.sendBeacon(
+        "/api/interview/voice-save",
+        new Blob(
+          [JSON.stringify({ session_id: sessionId, messages: transcript })],
+          { type: "application/json" }
+        )
+      );
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [mode, sessionId]);
 
   async function loadSession() {
     try {
@@ -201,10 +231,12 @@ ${guide}
     setSessionStatus("completed");
   }
 
-  async function saveVoiceTranscript() {
-    if (voiceMessages.length === 0) return;
+  const saveVoiceTranscript = useCallback(async () => {
+    const msgs = voiceMessagesRef.current;
+    if (msgs.length === 0 || voiceSavedRef.current) return;
+    voiceSavedRef.current = true;
     try {
-      const transcript = voiceMessages.map((m) => ({
+      const transcript = msgs.map((m) => ({
         role: m.source === "ai" ? "assistant" : "user",
         content: m.text,
       }));
@@ -215,8 +247,9 @@ ${guide}
       });
     } catch (err) {
       console.error("Failed to save voice transcript:", err);
+      voiceSavedRef.current = false; // Allow retry on failure
     }
-  }
+  }, [sessionId]);
 
   // ── Text mode functions ────────────────────────────────
 
