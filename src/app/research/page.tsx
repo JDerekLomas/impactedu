@@ -1,25 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-
-const areaImages: Record<string, { src: string; alt: string }> = {
-  "01": {
-    src: "/images/generated/research-01-learning-priorities.png",
-    alt: "Old textbook alongside a tablet — traditional curriculum meets digital learning",
-  },
-  "02": {
-    src: "/images/generated/research-02-measurement.png",
-    alt: "Assessment worksheets with hand-drawn adaptive pathways diagram",
-  },
-  "03": {
-    src: "/images/generated/research-03-ai-tools.png",
-    alt: "Teacher's desk with learning curves on laptop and graded papers, students in background",
-  },
-  "04": {
-    src: "/images/smartpaper-project.jpg",
-    alt: "Students in a Rajasthan classroom writing on paper worksheets",
-  },
-};
+import ResearchDoodles from "@/components/doodles/ResearchDoodles";
 
 export const metadata: Metadata = {
   title: "Research",
@@ -164,7 +145,8 @@ export default function ResearchPage() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-[120px_1fr] gap-4">
               <div className="font-[family-name:var(--font-jetbrains-mono)] text-sm text-muted-light">
-                {area.number}
+                <span>{area.number}</span>
+                <ResearchDoodles area={area.number} className="mt-4 hidden lg:block" />
               </div>
               <div>
                 <h2 className="font-[family-name:var(--font-source-serif)] text-2xl font-bold text-foreground">
@@ -173,17 +155,6 @@ export default function ResearchPage() {
                 <p className="text-accent text-sm font-medium mt-0.5">
                   {area.tagline}
                 </p>
-                {areaImages[area.number] && (
-                  <div className="mt-5 rounded-lg overflow-hidden border border-border">
-                    <Image
-                      src={areaImages[area.number].src}
-                      alt={areaImages[area.number].alt}
-                      width={900}
-                      height={500}
-                      className="w-full h-auto"
-                    />
-                  </div>
-                )}
                 <p className="mt-4 text-muted leading-relaxed max-w-2xl">
                   {area.framing}
                 </p>
