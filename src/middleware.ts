@@ -3,8 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Only protect /documents (not /documents/login)
-  if (pathname === "/documents" || (pathname.startsWith("/documents") && !pathname.startsWith("/documents/login"))) {
+  // Protect /documents (not /documents/login) and /admin
+  const isProtected =
+    (pathname === "/documents" || (pathname.startsWith("/documents") && !pathname.startsWith("/documents/login"))) ||
+    pathname.startsWith("/admin");
+
+  if (isProtected) {
     const token = request.cookies.get("docs_auth");
 
     if (!token) {
@@ -17,5 +21,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/documents/:path*"],
+  matcher: ["/documents/:path*", "/admin/:path*"],
 };

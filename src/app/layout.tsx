@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Source_Serif_4, JetBrains_Mono } from "next/font/google";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
+import LayoutShell from "@/components/LayoutShell";
 import InputWidget from "@/components/InputWidget";
 import "./globals.css";
 
@@ -56,9 +55,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${sourceSerif.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        <Nav />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <LayoutShell>{children}</LayoutShell>
         <InputWidget allowedHosts={["localhost", "vercel.app"]} />
       </body>
     </html>
