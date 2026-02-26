@@ -10,12 +10,12 @@ export default function Hero() {
           </p>
 
           <h1 className="font-[family-name:var(--font-source-serif)] text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-foreground leading-[1.15] tracking-tight">
-            Open research infrastructure{" "}
-            <span className="underline-accent">for AI in education</span>
+            What should students learn{" "}
+            <span className="underline-accent">in an AI age?</span>
           </h1>
 
           <p className="mt-6 text-lg text-muted leading-relaxed max-w-2xl">
-            AI is creating entirely new learning objectives — but we can&apos;t measure what we haven&apos;t defined. Impact-Edu.ai builds the open assessments, open tools, and open research the field needs to understand what actually works. No paywalls. No vendor lock-in. Evidence for everyone.
+            AI changes what students need to know — but education&apos;s standards were written before AI existed, and the process of updating them takes years. Impact-Edu.ai builds open research, open assessments, and open tools to help the field figure out what matters now — and measure whether we&apos;re teaching it.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3">

@@ -56,18 +56,19 @@ const roadmapItems = [
   },
   {
     number: "04",
-    title: "New Learning Objectives for the AI Era",
-    tagline: "Measuring what matters now, not just what mattered a decade ago",
-    status: "Planning",
+    title: "New Learning Priorities for the AI Era",
+    tagline: "Are we teaching the most important things?",
+    status: "Active research",
     description:
-      "Education largely operates around fixed learning objectives that change very slowly. But AI is creating entirely new things students need to learn — understanding AI capabilities and limitations, evaluating AI-generated content, using AI tools productively across disciplines. These objectives don't yet have clear definitions, let alone assessments.",
+      "The Common Core has no sense of priority across objectives — no way to say what matters most. The process of adding new standards takes years. But AI fundamentally changes what students need to know. What does literacy mean when AI can write? What math matters when AI can compute? How do diverse students learn to evaluate and use AI tools? These are urgent questions with no good answers yet.",
     goals: [
-      "Identify and define new learning objectives for AI literacy across K-12",
-      "Develop assessments that measure emerging AI competencies for diverse student populations",
-      "Create frameworks for how AI literacy objectives intersect with existing disciplinary standards",
-      "Publish open item banks for AI literacy assessment",
+      "Research and define what students actually need to learn in an AI age — across disciplines, not just 'AI literacy' as a standalone",
+      "Develop priority frameworks — which objectives matter most, given that AI changes the landscape",
+      "Build assessments for emerging competencies before standards bodies catch up",
+      "Study how diverse student populations interact with AI tools differently — equity in new learning objectives, not just access",
+      "Create rapid feedback loops between research findings and objective-setting, bypassing the multi-year standards revision cycle",
     ],
-    why: "You can't improve what you can't measure. And right now, we can't measure AI literacy because we haven't agreed on what it means. Defining these objectives — and building assessments for them — is prerequisite work for the entire field.",
+    why: "This is the foundational question. If we're not teaching the most important things, it doesn't matter how well we measure or how good our tools are. Education needs a mechanism for rapidly rethinking priorities — and right now it doesn't have one.",
   },
   {
     number: "05",

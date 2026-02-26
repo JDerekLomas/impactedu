@@ -4,13 +4,13 @@ import Link from "next/link";
 const researchAreas = [
   {
     number: "01",
-    title: "Open Assessments & Data",
+    title: "New Learning Priorities",
     description:
-      "Most assessment items are proprietary. Most psychometric data is locked away. We're building the largest open bank of CC-licensed assessment items with full psychometric data — so the whole field can build on shared evidence.",
+      "AI changes what students need to know — but education's standards were written before AI existed and take years to update. We research what actually matters now and build open assessments to measure it.",
     examples: [
-      "34K+ CC-licensed items with difficulty, discrimination, and alignment data",
-      "Open adaptive testing infrastructure anyone can deploy",
-      "Defining new learning objectives for AI literacy — measuring what matters now, not just what mattered a decade ago",
+      "What does literacy mean when AI can write? What math matters when AI can compute?",
+      "34K+ CC-licensed assessment items with open psychometric data",
+      "Rapid priority-setting frameworks that bypass the multi-year standards cycle",
     ],
   },
   {
@@ -88,17 +88,17 @@ export default function Home() {
               The problem
             </p>
             <h2 className="font-[family-name:var(--font-source-serif)] text-2xl sm:text-3xl font-bold text-foreground leading-snug">
-              Education has a measurement crisis
+              Education has a crisis of purpose
             </h2>
             <div className="mt-4 space-y-3 text-muted leading-relaxed">
               <p>
-                AI is creating entirely new learning objectives — helping diverse students understand, evaluate, and adopt AI tools — but education&apos;s measurement infrastructure hasn&apos;t caught up. Traditional standards change slowly. Assessment items are locked behind proprietary licenses. Psychometric data is hoarded by vendors.
+                AI fundamentally changes what students need to know — but education&apos;s standards were written before AI existed. The Common Core has no sense of priority across objectives. The process of adding new standards takes years. There is no mechanism for rapidly identifying what matters most in a world where AI can do much of what we currently teach.
               </p>
               <p>
-                Meanwhile, well-funded schools experiment with AI while under-resourced schools fall further behind. Vendors make claims no one can verify. Educators make decisions without evidence.
+                What does it mean to be literate when AI can write? What math matters when AI can compute? How do diverse students learn to evaluate and use AI tools effectively? These aren&apos;t hypothetical questions — they&apos;re urgent ones, and nobody has good answers yet.
               </p>
               <p>
-                The field needs open infrastructure — open assessments, open data, open research — that moves at the speed of the technology.
+                Meanwhile, well-funded schools experiment while under-resourced schools fall further behind. Vendors make claims. Teachers make decisions. Nobody has the evidence.
               </p>
             </div>
           </div>

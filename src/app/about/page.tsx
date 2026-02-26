@@ -17,10 +17,10 @@ export default function AboutPage() {
             About
           </p>
           <h1 className="font-[family-name:var(--font-source-serif)] text-3xl sm:text-4xl font-bold text-foreground leading-snug max-w-2xl">
-            Open research infrastructure for AI in education
+            Redefining what students need to learn — and proving what works
           </h1>
           <p className="mt-4 text-lg text-muted leading-relaxed max-w-2xl">
-            AI is creating entirely new things students need to learn — but we can&apos;t measure what we haven&apos;t defined. Impact-Edu.ai builds the open assessments, open tools, and open research the field needs to understand what actually works.
+            AI changes what matters in education. But education&apos;s goals were set before AI existed, and updating them takes years. Impact-Edu.ai builds the open research, open assessments, and open tools to help the field identify new priorities and produce evidence fast.
           </p>
         </div>
       </section>
@@ -33,20 +33,23 @@ export default function AboutPage() {
               The gap
             </p>
             <h2 className="font-[family-name:var(--font-source-serif)] text-2xl font-bold text-foreground leading-snug">
-              Education has a measurement crisis
+              Are we teaching the most important things?
             </h2>
             <div className="mt-4 space-y-3 text-muted leading-relaxed">
               <p>
-                AI is creating entirely new learning objectives — helping diverse students understand, evaluate, and use AI tools — but education&apos;s measurement infrastructure hasn&apos;t caught up. Standards change slowly. Assessment items are proprietary. Psychometric data is locked away. Meanwhile, vendors make claims nobody can verify and educators make decisions without evidence.
+                Education&apos;s standards were designed before AI existed. The Common Core has no sense of priority — no way to say which objectives matter most. Adding new standards takes years. There is no rapid mechanism for asking: what do students need to learn now that AI can do much of what we currently teach?
+              </p>
+              <p>
+                Meanwhile, AI tools are being adopted faster than anyone can study their effects. Vendors make claims nobody can verify. Assessment items are locked behind proprietary licenses. The field is flying blind — on both what to teach and how to measure it.
               </p>
               <p>The field needs:</p>
             </div>
             <ul className="mt-4 space-y-2">
               {[
-                ["Open research", "on what works — grounded in learning science, not vendor claims"],
-                ["Research tools", "adaptive tests, AI interviews, measurement frameworks — that move at the speed of AI"],
-                ["Practitioner training", "so educators can make evidence-based decisions, not fear-based ones"],
-                ["Field infrastructure", "standards, evaluation frameworks, and convenings that connect the people who matter"],
+                ["New learning priorities", "— identifying what students actually need to know in an AI age, not just what we've always taught"],
+                ["Open assessments and data", "— items, psychometric data, and research datasets published openly, not locked behind vendor agreements"],
+                ["Research at the speed of AI", "— open tools for rapid evidence production: adaptive tests, AI interviews, synthetic student simulation"],
+                ["Practitioner support", "— so educators can make evidence-based decisions about AI, not fear-based ones"],
               ].map(([bold, rest]) => (
                 <li key={bold} className="flex items-start gap-2 text-sm">
                   <span className="text-accent mt-1 flex-shrink-0">&mdash;</span>
