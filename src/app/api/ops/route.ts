@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 const REPO = "JDerekLomas/impactedu";
 const GITHUB_API = "https://api.github.com";
 
@@ -24,7 +26,7 @@ async function ghFetch(path: string) {
   }
   const res = await fetch(`${GITHUB_API}${path}`, {
     headers,
-    next: { revalidate: 60 },
+    cache: "no-store",
   });
   if (!res.ok) {
     throw new Error(`GitHub API ${res.status}: ${await res.text()}`);
