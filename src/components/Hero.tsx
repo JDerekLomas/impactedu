@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Doodle from "@/components/doodles/Doodle";
 
 export default function Hero() {
   return (
@@ -11,11 +12,21 @@ export default function Hero() {
 
           <h1 className="hero-enter hero-enter-2 font-[family-name:var(--font-source-serif)] text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-foreground leading-[1.15] tracking-tight max-w-3xl">
             What should students learn{" "}
-            <span className="underline-accent">in an AI age?</span>
+            <span className="relative inline-block">
+              in an AI age?
+              <Doodle
+                type="underline"
+                width={220}
+                height={16}
+                seed={42}
+                className="absolute -bottom-1 left-0 w-full"
+              />
+            </span>
           </h1>
 
           <p className="hero-enter hero-enter-3 mt-6 text-lg text-muted leading-relaxed max-w-xl">
-            Open research, open assessments, and open tools — helping education figure out what matters now.
+            Open research, open assessments, and open tools — helping education
+            figure out what matters now.
           </p>
 
           <div className="hero-enter hero-enter-4 mt-8 flex flex-col sm:flex-row gap-3">

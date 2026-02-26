@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import LogoStrip from "@/components/LogoStrip";
 import ScrollReveal from "@/components/ScrollReveal";
+import Doodle from "@/components/doodles/Doodle";
 import Link from "next/link";
 
 const evidence = [
@@ -27,15 +28,24 @@ export default function Home() {
     <>
       <Hero />
 
-      {/* Problem — centered pullquote with generous breathing room */}
+      {/* Problem — centered pullquote with hand-drawn quotes */}
       <section className="py-20 sm:py-28 bg-surface paper-texture">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
-            <blockquote className="font-[family-name:var(--font-source-serif)] text-2xl sm:text-[1.75rem] lg:text-[2rem] font-semibold text-foreground leading-snug">
-              &ldquo;What does it mean to be literate when AI can write?
-              <br className="hidden sm:inline" />
-              What math matters when AI can compute?&rdquo;
-            </blockquote>
+            <div className="relative inline-block">
+              <Doodle
+                type="quotes"
+                width={48}
+                height={36}
+                seed={7}
+                className="absolute -top-8 -left-10 opacity-40"
+              />
+              <blockquote className="font-[family-name:var(--font-source-serif)] text-2xl sm:text-[1.75rem] lg:text-[2rem] font-semibold text-foreground leading-snug">
+                What does it mean to be literate when AI can write?
+                <br className="hidden sm:inline" />
+                What math matters when AI can compute?
+              </blockquote>
+            </div>
             <p className="mt-8 text-muted leading-relaxed max-w-xl mx-auto">
               AI fundamentally changes what students need to know — but
               education&apos;s standards were written before AI existed, and
@@ -61,9 +71,18 @@ export default function Home() {
           </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {evidence.map((item) => (
+            {evidence.map((item, i) => (
               <ScrollReveal key={item.label}>
-                <div className="bg-paper rounded-lg border border-border p-8 hover:border-accent/30 transition-colors h-full">
+                <div className="bg-paper rounded-lg border border-border p-8 hover:border-accent/30 transition-colors h-full relative">
+                  {i === 0 && (
+                    <Doodle
+                      type="star"
+                      width={24}
+                      height={24}
+                      seed={13}
+                      className="absolute top-4 right-4 opacity-30"
+                    />
+                  )}
                   <div className="font-[family-name:var(--font-source-serif)] text-2xl font-bold text-foreground mb-1">
                     {item.stat}
                   </div>
