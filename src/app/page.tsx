@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import LogoStrip from "@/components/LogoStrip";
 import ScrollReveal from "@/components/ScrollReveal";
+import AnnotatedQuote from "@/components/AnnotatedQuote";
 import Link from "next/link";
 
 const evidence = [
@@ -31,11 +32,7 @@ export default function Home() {
       <section className="py-20 sm:py-28 bg-surface paper-texture">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
-            <blockquote className="font-[family-name:var(--font-source-serif)] text-2xl sm:text-[1.75rem] lg:text-[2rem] font-semibold text-foreground leading-snug">
-              What does it mean to be literate when AI can write?
-              <br className="hidden sm:inline" />
-              What math matters when AI can compute?
-            </blockquote>
+            <AnnotatedQuote />
             <p className="mt-8 text-muted leading-relaxed max-w-xl mx-auto">
               AI fundamentally changes what students need to know — but
               education&apos;s standards were written before AI existed, and

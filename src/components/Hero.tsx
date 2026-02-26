@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import Doodle from "@/components/doodles/Doodle";
+import Annotate from "@/components/Annotate";
 
 export default function Hero() {
   return (
@@ -12,14 +14,9 @@ export default function Hero() {
 
           <h1 className="hero-enter hero-enter-2 font-[family-name:var(--font-source-serif)] text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-foreground leading-[1.15] tracking-tight max-w-3xl">
             What should students learn{" "}
-            <span className="relative inline-block">
+            <Annotate type="highlight" color="rgba(255, 220, 100, 0.35)" padding={4} animationDuration={1200}>
               in an AI age?
-              <Doodle
-                type="underline"
-                delay={600}
-                className="absolute -bottom-1 left-0 w-full h-[10px]"
-              />
-            </span>
+            </Annotate>
           </h1>
 
           <p className="hero-enter hero-enter-3 mt-6 text-lg text-muted leading-relaxed max-w-xl">
