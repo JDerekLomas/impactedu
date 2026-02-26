@@ -34,23 +34,34 @@ async function ghFetch(path: string) {
 
 export async function GET() {
   try {
-    // Fetch issues and milestones in parallel
-    const [issues, milestones] = await Promise.all([
+    // GitHub Issues API treats comma-separated labels as AND (all must match).
+    // We need OR (any label matches), so fetch per-label and dedupe.
+    const labelFetches = OPS_LABELS.map((label) =>
       ghFetch(
-        `/repos/${REPO}/issues?state=all&per_page=100&labels=${OPS_LABELS.join(",")}&sort=created&direction=asc`
-      ),
+        `/repos/${REPO}/issues?state=all&per_page=100&labels=${encodeURIComponent(label)}&sort=created&direction=asc`
+      )
+    );
+    const [milestones, ...labelResults] = await Promise.all([
       ghFetch(`/repos/${REPO}/milestones?state=open&sort=due_on&direction=asc`),
+      ...labelFetches,
     ]);
 
-    // GitHub issues API returns PRs too — filter them out
-    // Also filter to only ops-labeled issues
-    const filtered = issues.filter(
-      (i: { pull_request?: unknown; labels: { name: string }[] }) =>
-        !i.pull_request &&
-        i.labels.some((l: { name: string }) => OPS_LABELS.includes(l.name))
-    );
+    // Dedupe issues by number, filter out PRs
+    const seen = new Set<number>();
+    const issues: { number: number; pull_request?: unknown; labels: { name: string }[] }[] = [];
+    for (const batch of labelResults) {
+      for (const issue of batch) {
+        if (!seen.has(issue.number) && !issue.pull_request) {
+          seen.add(issue.number);
+          issues.push(issue);
+        }
+      }
+    }
 
-    return NextResponse.json({ issues: filtered, milestones });
+    // Sort by issue number
+    issues.sort((a, b) => a.number - b.number);
+
+    return NextResponse.json({ issues, milestones });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
     return NextResponse.json({ error: message }, { status: 500 });
