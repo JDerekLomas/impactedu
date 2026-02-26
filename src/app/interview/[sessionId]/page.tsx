@@ -180,7 +180,7 @@ ${guide}
 
       await conversation.startSession({
         agentId,
-        connectionType: "webrtc",
+        connectionType: "websocket",
         overrides: prompt
           ? {
               agent: {
