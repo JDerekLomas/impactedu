@@ -10,7 +10,7 @@ const links = [
   { href: "/openitems", label: "Open Items" },
   { href: "/work", label: "Work" },
   { href: "/programs", label: "Programs" },
-  { href: "/tools/difficulty-estimator", label: "Tools" },
+  { href: "/tools", label: "Tools" },
   { href: "/blog", label: "Blog" },
   { href: "/ops", label: "Ops" },
   { href: "/contact", label: "Contact" },
