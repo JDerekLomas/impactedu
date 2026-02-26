@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { getAllPosts } from "@/lib/posts";
 
 export const metadata: Metadata = {
@@ -29,17 +28,6 @@ export default function BlogPage() {
 
       <section className="py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Notebook illustration as decorative element */}
-          <div className="flex justify-center mb-16">
-            <Image
-              src="/illustrations/notebook-1.png"
-              alt="Pencil sketch of a researcher's notebook with diagrams and annotations"
-              width={320}
-              height={227}
-              className="opacity-40 mix-blend-multiply"
-            />
-          </div>
-
           <div className="space-y-12">
             {posts.map((post) => (
               <article key={post.slug} className="group">

@@ -1,5 +1,25 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+
+const areaImages: Record<string, { src: string; alt: string }> = {
+  "01": {
+    src: "/images/generated/research-01-learning-priorities.png",
+    alt: "Old textbook alongside a tablet — traditional curriculum meets digital learning",
+  },
+  "02": {
+    src: "/images/generated/research-02-measurement.png",
+    alt: "Assessment worksheets with hand-drawn adaptive pathways diagram",
+  },
+  "03": {
+    src: "/images/generated/research-03-ai-tools.png",
+    alt: "Teacher's desk with learning curves on laptop and graded papers, students in background",
+  },
+  "04": {
+    src: "/images/smartpaper-project.jpg",
+    alt: "Students in a Rajasthan classroom writing on paper worksheets",
+  },
+};
 
 export const metadata: Metadata = {
   title: "Research",
@@ -153,6 +173,17 @@ export default function ResearchPage() {
                 <p className="text-accent text-sm font-medium mt-0.5">
                   {area.tagline}
                 </p>
+                {areaImages[area.number] && (
+                  <div className="mt-5 rounded-lg overflow-hidden border border-border">
+                    <Image
+                      src={areaImages[area.number].src}
+                      alt={areaImages[area.number].alt}
+                      width={900}
+                      height={500}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                )}
                 <p className="mt-4 text-muted leading-relaxed max-w-2xl">
                   {area.framing}
                 </p>

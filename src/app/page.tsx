@@ -1,7 +1,6 @@
 import Hero from "@/components/Hero";
 import LogoStrip from "@/components/LogoStrip";
 import ScrollReveal from "@/components/ScrollReveal";
-import Image from "next/image";
 import Link from "next/link";
 
 const evidence = [
@@ -94,17 +93,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Illustration break */}
-      <ScrollReveal className="py-8 flex justify-center">
-        <Image
-          src="/illustrations/globe-1.png"
-          alt="Pencil sketch of a globe showing connections between schools"
-          width={420}
-          height={300}
-          className="opacity-50 mix-blend-multiply"
-        />
-      </ScrollReveal>
 
       <LogoStrip />
 
