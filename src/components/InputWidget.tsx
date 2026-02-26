@@ -66,6 +66,11 @@ function isTextElement(el: Element): boolean {
     "TH",
     "LABEL",
     "BUTTON",
+    "BLOCKQUOTE",
+    "STRONG",
+    "EM",
+    "CITE",
+    "FIGCAPTION",
   ];
   if (!textTags.includes(el.tagName)) return false;
 
@@ -212,8 +217,9 @@ export default function InputWidget({
     const target = e.target as HTMLElement;
 
     if (mode === "editing" && isTextElement(target)) {
+      const capturedOriginal = target.textContent || "";
       setActiveElement(target);
-      setOriginalText(target.textContent || "");
+      setOriginalText(capturedOriginal);
       target.contentEditable = "true";
       target.style.outline = "2px solid #b45309";
       target.style.outlineOffset = "2px";
@@ -225,12 +231,12 @@ export default function InputWidget({
         target.style.outlineOffset = "";
 
         const newText = target.textContent || "";
-        if (newText !== originalText) {
+        if (newText !== capturedOriginal) {
           saveInput({
             type: "text-edit",
             selector: getSelector(target),
             path: window.location.pathname,
-            original: originalText,
+            original: capturedOriginal,
             edited: newText,
             timestamp: new Date().toISOString(),
           });
