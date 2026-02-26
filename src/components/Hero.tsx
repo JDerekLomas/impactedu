@@ -2,43 +2,43 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#1e1b4b] via-[#312e81] to-[#3730a3]">
-      {/* Subtle grid pattern */}
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81]">
+      {/* Subtle dot pattern */}
       <div
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 opacity-[0.07]"
         style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
         }}
       />
 
       {/* Gradient orbs */}
-      <div className="absolute top-20 right-20 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 left-10 w-72 h-72 bg-amber-400/10 rounded-full blur-3xl" />
+      <div className="absolute top-10 right-1/4 w-[500px] h-[500px] bg-indigo-500/15 rounded-full blur-3xl" />
+      <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 right-0 w-64 h-64 bg-cyan-400/10 rounded-full blur-3xl" />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-sm text-indigo-200 mb-6">
-            <span className="w-2 h-2 bg-amber-400 rounded-full" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-sm text-indigo-200 mb-8">
+            <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
             A program of Wisdom Frontiers
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-bold text-white leading-[1.1] tracking-tight">
             AI should work for{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400">
               every learner
             </span>
           </h1>
 
-          <p className="mt-6 text-lg sm:text-xl text-indigo-200 leading-relaxed max-w-2xl">
-            Impact-Edu.ai advances equitable access to AI-powered learning through open research, open-source tools, and practitioner training — so every educator and learner can benefit from advances in artificial intelligence.
+          <p className="mt-6 text-lg sm:text-xl text-indigo-200/90 leading-relaxed max-w-2xl">
+            We advance equitable access to AI-powered learning through open research, open-source tools, and practitioner training — so every educator and learner benefits from advances in artificial intelligence.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
             <Link
               href="/programs"
-              className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center justify-center px-7 py-3.5 bg-white text-[#1e1b4b] font-semibold rounded-xl hover:bg-gray-50 transition-all shadow-lg shadow-black/10 hover:shadow-xl hover:shadow-black/15"
             >
               Our Programs
               <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -47,12 +47,19 @@ export default function Hero() {
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-6 py-3 border border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
+              className="inline-flex items-center justify-center px-7 py-3.5 border border-white/25 text-white font-semibold rounded-xl hover:bg-white/10 transition-all backdrop-blur-sm"
             >
               Get Involved
             </Link>
           </div>
         </div>
+      </div>
+
+      {/* Wave divider */}
+      <div className="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block" preserveAspectRatio="none">
+          <path d="M0 60V30C240 10 480 0 720 10C960 20 1200 40 1440 30V60H0Z" fill="var(--surface)" />
+        </svg>
       </div>
     </section>
   );

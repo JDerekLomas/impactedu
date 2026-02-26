@@ -56,7 +56,7 @@ export default function Home() {
       <Hero />
 
       {/* Problem statement */}
-      <section className="py-20 bg-surface">
+      <section className="pt-10 pb-20 bg-surface">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
@@ -108,17 +108,17 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { label: "Program areas", value: "4" },
-                { label: "Focus", value: "Equity" },
-                { label: "All research", value: "Open" },
-                { label: "All tools", value: "Open Source" },
+                { label: "Program areas", value: "4", accent: "text-indigo-600" },
+                { label: "Focus", value: "Equity", accent: "text-amber-600" },
+                { label: "All research", value: "Open", accent: "text-emerald-600" },
+                { label: "All tools", value: "Open Source", accent: "text-rose-600" },
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="bg-white rounded-xl p-6 border border-border text-center"
+                  className="bg-white rounded-2xl p-6 border border-border text-center hover:shadow-md transition-shadow"
                 >
-                  <div className="text-2xl font-bold text-primary">{stat.value}</div>
-                  <div className="text-sm text-muted mt-1">{stat.label}</div>
+                  <div className={`text-3xl font-bold ${stat.accent}`}>{stat.value}</div>
+                  <div className="text-sm text-muted mt-1 font-medium">{stat.label}</div>
                 </div>
               ))}
             </div>

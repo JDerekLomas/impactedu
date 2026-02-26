@@ -10,7 +10,7 @@ interface ProgramCardProps {
 export default function ProgramCard({ title, description, icon, color }: ProgramCardProps) {
   return (
     <Link href="/programs" className="group block">
-      <div className="relative h-full p-6 bg-white rounded-2xl border border-border hover:border-primary-lighter/30 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300">
+      <div className="relative h-full p-6 bg-white rounded-2xl border border-border hover:border-primary-lighter/30 hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 hover:-translate-y-1">
         <div
           className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${color}`}
         >
@@ -20,7 +20,7 @@ export default function ProgramCard({ title, description, icon, color }: Program
           {title}
         </h3>
         <p className="text-sm text-muted leading-relaxed">{description}</p>
-        <div className="mt-4 flex items-center text-sm font-medium text-primary-lighter opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="mt-4 flex items-center text-sm font-medium text-primary-lighter opacity-0 group-hover:opacity-100 transition-all">
           Learn more
           <svg className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
