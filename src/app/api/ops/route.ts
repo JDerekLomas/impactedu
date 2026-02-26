@@ -5,16 +5,6 @@ export const dynamic = "force-dynamic";
 const REPO = "JDerekLomas/impactedu";
 const GITHUB_API = "https://api.github.com";
 
-// Labels that mark ops-related issues (created by our setup)
-const OPS_LABELS = [
-  "grant",
-  "partnership",
-  "research",
-  "hiring",
-  "infrastructure",
-  "ops",
-];
-
 async function ghFetch(path: string) {
   const headers: Record<string, string> = {
     Accept: "application/vnd.github+json",
@@ -29,41 +19,39 @@ async function ghFetch(path: string) {
     cache: "no-store",
   });
   if (!res.ok) {
-    throw new Error(`GitHub API ${res.status}: ${await res.text()}`);
+    const text = await res.text();
+    throw new Error(`GitHub API ${res.status}: ${text}`);
   }
   return res.json();
 }
 
 export async function GET() {
   try {
-    // GitHub Issues API treats comma-separated labels as AND (all must match).
-    // We need OR (any label matches), so fetch per-label and dedupe.
-    const labelFetches = OPS_LABELS.map((label) =>
+    // Use search API for OR-based label matching (single request instead of 6)
+    const labelQuery = [
+      "grant",
+      "partnership",
+      "research",
+      "hiring",
+      "infrastructure",
+      "ops",
+    ]
+      .map((l) => `label:${l}`)
+      .join("+");
+
+    const [searchResult, milestones] = await Promise.all([
       ghFetch(
-        `/repos/${REPO}/issues?state=all&per_page=100&labels=${encodeURIComponent(label)}&sort=created&direction=asc`
-      )
-    );
-    const [milestones, ...labelResults] = await Promise.all([
-      ghFetch(`/repos/${REPO}/milestones?state=open&sort=due_on&direction=asc`),
-      ...labelFetches,
+        `/search/issues?q=repo:${REPO}+is:issue+${labelQuery}&per_page=100&sort=created&order=asc`
+      ),
+      ghFetch(
+        `/repos/${REPO}/milestones?state=open&sort=due_on&direction=asc`
+      ),
     ]);
 
-    // Dedupe issues by number, filter out PRs
-    const seen = new Set<number>();
-    const issues: { number: number; pull_request?: unknown; labels: { name: string }[] }[] = [];
-    for (const batch of labelResults) {
-      for (const issue of batch) {
-        if (!seen.has(issue.number) && !issue.pull_request) {
-          seen.add(issue.number);
-          issues.push(issue);
-        }
-      }
-    }
-
-    // Sort by issue number
-    issues.sort((a, b) => a.number - b.number);
-
-    return NextResponse.json({ issues, milestones });
+    return NextResponse.json({
+      issues: searchResult.items ?? [],
+      milestones,
+    });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
     return NextResponse.json({ error: message }, { status: 500 });
