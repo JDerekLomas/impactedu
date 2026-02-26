@@ -29,7 +29,7 @@ const projects = [
       "PDF worksheet generation with interactive widget renderers",
       "REST API and embeddable SDKs for integration by other tools",
     ],
-    link: "https://openitems.impact-edu.ai",
+    link: "/openitems",
   },
   {
     number: "02",

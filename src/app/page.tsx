@@ -10,7 +10,7 @@ const evidence = [
       "Open assessment infrastructure for K-12. 34K+ CC-licensed items, AI generation, LLM evaluation, adaptive practice — built on the Learning Commons Knowledge Graph.",
     stat: "34K+ open items",
     detail: "CC-licensed, standards-aligned",
-    link: "https://openitems.impact-edu.ai",
+    link: "/openitems",
   },
   {
     label: "SmartPaper",
