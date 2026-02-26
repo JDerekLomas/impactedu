@@ -151,11 +151,29 @@ function MilestoneCard({ m }: { m: Milestone }) {
   );
 }
 
+function parseAward(body: string | null): string | null {
+  if (!body) return null;
+  const m = body.match(/###\s*Award[:\s]*(.+)/i);
+  if (m) return m[1].trim();
+  const m2 = body.match(/Up to \$[\d,]+K?/i);
+  return m2 ? m2[0] : null;
+}
+
+function isBlocking(body: string | null): boolean {
+  return !!body?.match(/\bBLOCKING\b/);
+}
+
 function IssueCard({ issue }: { issue: Issue }) {
   const cat = getCategory(issue);
   const meta = CATEGORY_META[cat];
   const priority = getPriority(issue);
   const isDone = issue.state === "closed";
+  const award = parseAward(issue.body);
+  const blocking = isBlocking(issue.body);
+
+  // Deadline from milestone
+  const deadline = issue.milestone?.due_on;
+  const days = deadline ? daysUntil(deadline) : null;
 
   // Extract checkboxes from body for progress
   const checks = issue.body?.match(/- \[[ x]\]/g) ?? [];
@@ -198,15 +216,42 @@ function IssueCard({ issue }: { issue: Issue }) {
         </div>
 
         <div className="flex-1 min-w-0">
-          {/* Title */}
-          <h4
-            className={`text-sm font-medium leading-tight ${isDone ? "line-through text-muted" : "text-foreground"}`}
-          >
-            {issue.title}
-          </h4>
+          {/* Title + right-side metadata */}
+          <div className="flex items-start justify-between gap-2">
+            <h4
+              className={`text-sm font-medium leading-tight ${isDone ? "line-through text-muted" : "text-foreground"}`}
+            >
+              {issue.title}
+            </h4>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              {/* Deadline countdown */}
+              {days !== null && !isDone && (
+                <span
+                  className={`font-[family-name:var(--font-jetbrains-mono)] text-[10px] px-1.5 py-0.5 rounded ${urgencyClass(days)}`}
+                >
+                  {days < 0
+                    ? `${Math.abs(days)}d overdue`
+                    : days === 0
+                      ? "Today"
+                      : `${days}d`}
+                </span>
+              )}
+              <span className="text-[10px] text-muted-light font-[family-name:var(--font-jetbrains-mono)]">
+                #{issue.number}
+              </span>
+            </div>
+          </div>
 
-          {/* Labels row */}
+          {/* Metadata row: date, labels, award */}
           <div className="flex flex-wrap items-center gap-1.5 mt-2">
+            {/* Deadline date */}
+            {deadline && (
+              <span className="text-[10px] text-muted font-[family-name:var(--font-jetbrains-mono)]">
+                {formatDate(deadline)}
+              </span>
+            )}
+            {deadline && <span className="text-border">|</span>}
+
             <span
               className="inline-block text-[10px] font-[family-name:var(--font-jetbrains-mono)] uppercase tracking-wider px-1.5 py-0.5 rounded"
               style={{
@@ -221,9 +266,29 @@ function IssueCard({ issue }: { issue: Issue }) {
                 Urgent
               </span>
             )}
+            {blocking && (
+              <span className="inline-block text-[10px] font-[family-name:var(--font-jetbrains-mono)] uppercase tracking-wider px-1.5 py-0.5 rounded bg-amber-50 text-amber-700">
+                Blocking
+              </span>
+            )}
+            {award && (
+              <span className="text-[10px] text-accent font-[family-name:var(--font-jetbrains-mono)] font-medium">
+                {award}
+              </span>
+            )}
             {issue.milestone && (
               <span className="text-[10px] text-muted font-[family-name:var(--font-jetbrains-mono)]">
                 {issue.milestone.title}
+              </span>
+            )}
+            {issue.assignee && (
+              <span className="inline-flex items-center gap-1 text-[10px] text-muted">
+                <img
+                  src={issue.assignee.avatar_url}
+                  alt={issue.assignee.login}
+                  className="w-3.5 h-3.5 rounded-full"
+                />
+                {issue.assignee.login}
               </span>
             )}
           </div>
@@ -247,11 +312,6 @@ function IssueCard({ issue }: { issue: Issue }) {
             </div>
           )}
         </div>
-
-        {/* Issue number */}
-        <span className="text-[10px] text-muted-light font-[family-name:var(--font-jetbrains-mono)] flex-shrink-0">
-          #{issue.number}
-        </span>
       </div>
     </a>
   );
@@ -292,6 +352,101 @@ function FilterPill({
         {count}
       </span>
     </button>
+  );
+}
+
+function TimelineBar({ milestones }: { milestones: Milestone[] }) {
+  const withDates = milestones.filter((m) => m.due_on);
+  if (withDates.length === 0) return null;
+
+  const now = new Date();
+  const dates = withDates.map((m) => new Date(m.due_on!).getTime());
+  const minDate = Math.min(now.getTime(), ...dates);
+  const maxDate = Math.max(...dates);
+  const range = maxDate - minDate || 1;
+
+  // Month labels
+  const months: { label: string; pct: number }[] = [];
+  const startMonth = new Date(minDate);
+  startMonth.setDate(1);
+  const endDate = new Date(maxDate);
+  for (
+    let d = new Date(startMonth);
+    d <= endDate;
+    d.setMonth(d.getMonth() + 1)
+  ) {
+    const pct = ((d.getTime() - minDate) / range) * 100;
+    if (pct >= 0 && pct <= 100) {
+      months.push({
+        label: d.toLocaleDateString("en-US", { month: "short" }),
+        pct,
+      });
+    }
+  }
+
+  const nowPct = ((now.getTime() - minDate) / range) * 100;
+
+  return (
+    <div className="relative">
+      {/* Month labels */}
+      <div className="relative h-5 mb-1">
+        {months.map((m, i) => (
+          <span
+            key={i}
+            className="absolute text-[10px] text-muted font-[family-name:var(--font-jetbrains-mono)]"
+            style={{ left: `${Math.max(0, Math.min(95, m.pct))}%` }}
+          >
+            {m.label}
+          </span>
+        ))}
+      </div>
+      {/* Track */}
+      <div className="relative h-8 bg-surface-alt rounded-full overflow-visible border border-border">
+        {/* Today marker */}
+        <div
+          className="absolute top-0 bottom-0 w-0.5 bg-accent z-10"
+          style={{ left: `${Math.max(0, Math.min(100, nowPct))}%` }}
+        >
+          <span className="absolute -top-5 -translate-x-1/2 text-[9px] text-accent font-[family-name:var(--font-jetbrains-mono)] font-medium whitespace-nowrap">
+            Today
+          </span>
+        </div>
+        {/* Milestone markers */}
+        {withDates.map((m) => {
+          const pct =
+            ((new Date(m.due_on!).getTime() - minDate) / range) * 100;
+          const days = daysUntil(m.due_on!);
+          return (
+            <a
+              key={m.number}
+              href={m.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute top-1/2 -translate-y-1/2 group"
+              style={{ left: `${Math.max(1, Math.min(99, pct))}%` }}
+            >
+              <div
+                className={`w-3 h-3 rounded-full border-2 border-paper -ml-1.5 ${
+                  days < 0
+                    ? "bg-red-500"
+                    : days <= 14
+                      ? "bg-amber-500"
+                      : days <= 30
+                        ? "bg-yellow-500"
+                        : "bg-foreground"
+                }`}
+              />
+              {/* Tooltip */}
+              <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block z-20">
+                <div className="bg-foreground text-background text-[10px] font-[family-name:var(--font-jetbrains-mono)] px-2 py-1 rounded whitespace-nowrap">
+                  {m.title} — {formatDate(m.due_on!)}
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -439,13 +594,22 @@ export default function OpsPage() {
             </div>
           </section>
 
-          {/* Milestones / Deadlines */}
+          {/* Timeline */}
           {milestones.length > 0 && (
             <section className="py-10">
               <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="font-[family-name:var(--font-jetbrains-mono)] text-xs uppercase tracking-wider text-muted mb-4">
-                  Upcoming Deadlines
+                  Timeline
                 </h2>
+                <TimelineBar milestones={milestones} />
+              </div>
+            </section>
+          )}
+
+          {/* Milestone cards */}
+          {milestones.length > 0 && (
+            <section className="pb-10">
+              <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   {milestones.map((m) => (
                     <MilestoneCard key={m.number} m={m} />
