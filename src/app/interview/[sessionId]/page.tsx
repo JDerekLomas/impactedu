@@ -185,7 +185,7 @@ ${guide}
           ? {
               agent: {
                 prompt: { prompt },
-                firstMessage: `Hi there! I'm an AI research assistant from Impact Edu, and I'll be interviewing you about "${studyTitle}". Are you ready to get started?`,
+                firstMessage: `Hey! Thanks for taking the time to chat. Derek asked me to have a quick conversation with you about ${studyTitle}. It should only take about ten minutes. Sound good?`,
               },
             }
           : undefined,
