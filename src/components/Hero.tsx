@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import Annotate from "@/components/Annotate";
 
 export default function Hero() {
   return (
@@ -13,10 +10,7 @@ export default function Hero() {
           </p>
 
           <h1 className="hero-enter hero-enter-2 font-[family-name:var(--font-source-serif)] text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-foreground leading-[1.15] tracking-tight max-w-3xl">
-            What should students learn{" "}
-            <Annotate type="highlight" color="rgba(255, 220, 100, 0.35)" padding={4} animationDuration={1200}>
-              in an AI age?
-            </Annotate>
+            What should students learn in an AI age?
           </h1>
 
           <p className="hero-enter hero-enter-3 mt-6 text-lg text-muted leading-relaxed max-w-xl">
