@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -134,13 +135,24 @@ export default function AboutPage() {
           </h2>
 
           <div className="border border-border rounded-lg p-6 bg-paper max-w-2xl">
-            <h3 className="font-[family-name:var(--font-source-serif)] text-xl font-bold text-foreground">
-              Derek Lomas, PhD
-            </h3>
-            <p className="text-accent text-sm font-medium mt-0.5">Program Director</p>
-            <p className="mt-3 text-sm text-muted leading-relaxed">
-              PhD in Human-Computer Interaction from Carnegie Mellon University under Ken Koedinger, one of the founders of the intelligent tutoring systems field. Former Assistant Professor at TU Delft. 75+ publications spanning learning science, game design, and AI-powered education. Research has involved 70,000+ experimental subjects. Tools have reached 15 million students across the US and India.
-            </p>
+            <div className="flex items-start gap-5">
+              <Image
+                src="/images/headshot.png"
+                alt="Derek Lomas"
+                width={96}
+                height={96}
+                className="rounded-full object-cover flex-shrink-0 grayscale"
+              />
+              <div>
+                <h3 className="font-[family-name:var(--font-source-serif)] text-xl font-bold text-foreground">
+                  Derek Lomas, PhD
+                </h3>
+                <p className="text-accent text-sm font-medium mt-0.5">Program Director</p>
+                <p className="mt-3 text-sm text-muted leading-relaxed">
+                  PhD in Human-Computer Interaction from Carnegie Mellon University under Ken Koedinger, one of the founders of the intelligent tutoring systems field. Former Assistant Professor at TU Delft. 75+ publications spanning learning science, game design, and AI-powered education. Research has involved 70,000+ experimental subjects. Tools have reached 15 million students across the US and India.
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="mt-6 border border-border rounded-lg p-6 bg-paper max-w-2xl">

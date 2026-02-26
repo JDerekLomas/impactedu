@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -205,6 +206,30 @@ export default function WorkPage() {
                       </div>
                     ))}
                   </div>
+
+                  {/* Project image */}
+                  {project.number === "01" && (
+                    <div className="mt-5 rounded-lg overflow-hidden border border-border">
+                      <Image
+                        src="/images/smartpaper-project.jpg"
+                        alt="Students in a Rajasthan classroom using SmartPaper worksheets"
+                        width={800}
+                        height={600}
+                        className="w-full h-auto"
+                      />
+                    </div>
+                  )}
+                  {project.number === "02" && (
+                    <div className="mt-5 rounded-lg overflow-hidden border border-border">
+                      <Image
+                        src="/images/playpower-project.png"
+                        alt="PlayPower Labs — next-generation learning products"
+                        width={800}
+                        height={400}
+                        className="w-full h-auto"
+                      />
+                    </div>
+                  )}
 
                   {/* Details */}
                   <ul className="mt-5 space-y-2">
