@@ -108,14 +108,21 @@ export default function InputWidget({
     const host = window.location.hostname;
     const params = new URLSearchParams(window.location.search);
 
-    // Share mode: ?getinput param is present
-    const shareMode = params.has("getinput");
+    // Share mode: ?getinput or ?getinput=1 param is present, or persisted in sessionStorage
+    const paramPresent = params.has("getinput");
+    const sessionPersisted = sessionStorage.getItem("getinput-share") === "1";
+    const shareMode = paramPresent || sessionPersisted;
+
+    // Persist share mode for the session so navigation doesn't kill it
+    if (paramPresent) {
+      sessionStorage.setItem("getinput-share", "1");
+    }
+
     setIsShareMode(shareMode);
 
     // Calculate the review URL
     let targetUrl: string | undefined;
     if (shareMode) {
-      // Use the clean URL (without getinput param) as the review URL
       const cleanUrl = new URL(window.location.href);
       cleanUrl.searchParams.delete("getinput");
       targetUrl = cleanUrl.toString();
@@ -195,13 +202,10 @@ export default function InputWidget({
   };
 
   const shareReviewUrl = async () => {
-    // Generate a share URL by adding ?getinput to the current page
     const baseUrl = reviewUrl || window.location.href;
     const url = new URL(baseUrl);
-    url.searchParams.set("getinput", "");
-    // Clean up the URL (remove empty = sign)
-    const shareUrl = url.toString().replace("getinput=&", "getinput&").replace("getinput=", "getinput");
-    await navigator.clipboard.writeText(shareUrl);
+    url.searchParams.set("getinput", "1");
+    await navigator.clipboard.writeText(url.toString());
     showToastWithMessage("Share link copied!");
   };
 
