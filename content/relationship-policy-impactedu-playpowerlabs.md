@@ -94,11 +94,11 @@ Any contract between Wisdom Frontiers (including Impact-Edu.ai) and PlayPower La
 
 ### 4.3 Competitive Process Threshold
 
-For any single engagement or series of related engagements with PlayPower Labs exceeding **$25,000 in a fiscal year**, Wisdom Frontiers must conduct a documented competitive process (e.g., request for proposals, solicitation of comparable bids) or provide a written board justification for sole-source procurement, including why PlayPower Labs is uniquely qualified and why a competitive process is impractical.
+For any single engagement or series of related engagements with PlayPower Labs exceeding **$50,000 in a fiscal year**, Wisdom Frontiers must conduct a documented competitive process (e.g., request for proposals, solicitation of comparable bids) or provide a written board justification for sole-source procurement, including why PlayPower Labs is uniquely qualified and why a competitive process is impractical.
 
 ### 4.4 Diversification
 
-Wisdom Frontiers should actively develop relationships with multiple service providers. Over time, no single vendor — including PlayPower Labs — should account for more than 50% of the organization's contracted services in a given fiscal year, unless the board documents a specific justification.
+Wisdom Frontiers should actively develop relationships with multiple service providers and work toward diversifying its contractor base so that no single vendor — including PlayPower Labs — accounts for a disproportionate share of contracted services. The board should monitor vendor concentration annually and document its rationale when a single vendor relationship is substantial relative to total program expenditures.
 
 ---
 
