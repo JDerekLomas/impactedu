@@ -4,13 +4,13 @@ import Link from "next/link";
 const researchAreas = [
   {
     number: "01",
-    title: "Impact Research",
+    title: "Open Assessments & Data",
     description:
-      "Efficacy studies, equity analyses, and measurement of what actually works when AI enters classrooms. Not vendor marketing — real evidence.",
+      "Most assessment items are proprietary. Most psychometric data is locked away. We're building the largest open bank of CC-licensed assessment items with full psychometric data — so the whole field can build on shared evidence.",
     examples: [
-      "LLM difficulty estimation across 200 experimental conditions (AIED 2026)",
-      "Measurable reduction in learning poverty via SmartPaper in Rajasthan",
-      "Large-scale A/B testing workshops at L@S (2020-2023)",
+      "34K+ CC-licensed items with difficulty, discrimination, and alignment data",
+      "Open adaptive testing infrastructure anyone can deploy",
+      "Defining new learning objectives for AI literacy — measuring what matters now, not just what mattered a decade ago",
     ],
   },
   {
@@ -19,31 +19,31 @@ const researchAreas = [
     description:
       "Open tools purpose-built for studying AI in education — adaptive assessments, AI-powered qualitative interviews, synthetic student simulation, item calibration.",
     examples: [
-      "Adaptive testing with 34K+ CC-licensed items (MCQMCP)",
-      "AI interviews by text and voice for qualitative research",
-      "Synthetic student calibration for instant psychometric feedback",
+      "AI interviews by text and voice for qualitative research at scale",
+      "Synthetic student simulation for instant psychometric feedback",
+      "LLM evaluation framework (200 conditions, 15+ models — AIED 2026)",
     ],
   },
   {
     number: "03",
-    title: "Practitioner Training",
+    title: "Research Hub",
     description:
-      "Helping educators and districts make evidence-based decisions about AI tools — not adopt them fearfully or uncritically.",
+      "A public database of relevant papers and an active research program conducting new studies — like our AIED 2026 work on LLM difficulty estimation.",
     examples: [
-      "AI Literacy Lab for hands-on practice",
-      "District-level AI integration planning",
-      "Train-the-trainer programs that scale through educator networks",
+      "Public research database of AI-in-education papers",
+      "Active research program with open publications",
+      "Efficacy studies, equity analyses, measurement frameworks",
     ],
   },
   {
     number: "04",
-    title: "Field-Building",
+    title: "Practitioner Training & Field-Building",
     description:
-      "Connecting researchers, practitioners, developers, and policymakers. Convening the people who need to be in the same room.",
+      "Helping educators make evidence-based decisions about AI tools, and connecting the researchers, practitioners, and policymakers who need to be in the same room.",
     examples: [
-      "Annual convenings on AI in education",
-      "Working groups on assessment, equity, safety, efficacy",
-      "Policy briefs that translate research into guidance",
+      "AI Literacy Lab for hands-on practice",
+      "District-level AI integration planning",
+      "Convenings and working groups on assessment, equity, safety",
     ],
   },
 ];
@@ -88,14 +88,17 @@ export default function Home() {
               The problem
             </p>
             <h2 className="font-[family-name:var(--font-source-serif)] text-2xl sm:text-3xl font-bold text-foreground leading-snug">
-              AI is transforming education faster than we can measure its impact
+              Education has a measurement crisis
             </h2>
             <div className="mt-4 space-y-3 text-muted leading-relaxed">
               <p>
-                Well-funded schools adopt AI tools while under-resourced schools fall behind. Vendors make claims no one can verify. Educators make decisions without evidence. The gap between what AI <em>could</em> do for learning and what we <em>know</em> it does is enormous.
+                AI is creating entirely new learning objectives — helping diverse students understand, evaluate, and adopt AI tools — but education&apos;s measurement infrastructure hasn&apos;t caught up. Traditional standards change slowly. Assessment items are locked behind proprietary licenses. Psychometric data is hoarded by vendors.
               </p>
               <p>
-                We need research infrastructure that moves as fast as the technology — open tools for measuring impact, not just building products.
+                Meanwhile, well-funded schools experiment with AI while under-resourced schools fall further behind. Vendors make claims no one can verify. Educators make decisions without evidence.
+              </p>
+              <p>
+                The field needs open infrastructure — open assessments, open data, open research — that moves at the speed of the technology.
               </p>
             </div>
           </div>

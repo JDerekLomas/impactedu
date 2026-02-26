@@ -17,10 +17,10 @@ export default function AboutPage() {
             About
           </p>
           <h1 className="font-[family-name:var(--font-source-serif)] text-3xl sm:text-4xl font-bold text-foreground leading-snug max-w-2xl">
-            Research infrastructure for AI in education
+            Open research infrastructure for AI in education
           </h1>
           <p className="mt-4 text-lg text-muted leading-relaxed max-w-2xl">
-            Impact-Edu.ai conducts and funds research on AI&apos;s real impact in classrooms, and builds the open tools that make that research possible.
+            AI is creating entirely new things students need to learn — but we can&apos;t measure what we haven&apos;t defined. Impact-Edu.ai builds the open assessments, open tools, and open research the field needs to understand what actually works.
           </p>
         </div>
       </section>
@@ -33,11 +33,11 @@ export default function AboutPage() {
               The gap
             </p>
             <h2 className="font-[family-name:var(--font-source-serif)] text-2xl font-bold text-foreground leading-snug">
-              AI is transforming education — but we&apos;re flying blind
+              Education has a measurement crisis
             </h2>
             <div className="mt-4 space-y-3 text-muted leading-relaxed">
               <p>
-                AI tools are being adopted in schools faster than anyone can study their effects. Well-funded schools experiment while under-resourced schools fall further behind. Vendors make claims. Teachers make decisions. Nobody has the evidence.
+                AI is creating entirely new learning objectives — helping diverse students understand, evaluate, and use AI tools — but education&apos;s measurement infrastructure hasn&apos;t caught up. Standards change slowly. Assessment items are proprietary. Psychometric data is locked away. Meanwhile, vendors make claims nobody can verify and educators make decisions without evidence.
               </p>
               <p>The field needs:</p>
             </div>

@@ -10,12 +10,12 @@ export default function Hero() {
           </p>
 
           <h1 className="font-[family-name:var(--font-source-serif)] text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-foreground leading-[1.15] tracking-tight">
-            Researching what works{" "}
-            <span className="underline-accent">when AI meets education</span>
+            Open research infrastructure{" "}
+            <span className="underline-accent">for AI in education</span>
           </h1>
 
           <p className="mt-6 text-lg text-muted leading-relaxed max-w-2xl">
-            Impact-Edu.ai conducts and funds research on AI&apos;s real impact in classrooms, and builds open tools for that research — adaptive assessments, AI interviews, measurement frameworks. Moving at the speed of AI, grounded in learning science.
+            AI is creating entirely new learning objectives — but we can&apos;t measure what we haven&apos;t defined. Impact-Edu.ai builds the open assessments, open tools, and open research the field needs to understand what actually works. No paywalls. No vendor lock-in. Evidence for everyone.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3">

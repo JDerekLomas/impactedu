@@ -18,7 +18,9 @@ export default function Footer() {
             <p className="font-[family-name:var(--font-jetbrains-mono)] text-xs uppercase tracking-wider text-muted mb-3">Navigate</p>
             <div className="space-y-1.5">
               <Link href="/about" className="block text-sm text-muted hover:text-foreground transition-colors">About</Link>
+              <Link href="/work" className="block text-sm text-muted hover:text-foreground transition-colors">Work</Link>
               <Link href="/programs" className="block text-sm text-muted hover:text-foreground transition-colors">Programs</Link>
+              <Link href="/roadmap" className="block text-sm text-muted hover:text-foreground transition-colors">Roadmap</Link>
               <Link href="/contact" className="block text-sm text-muted hover:text-foreground transition-colors">Contact</Link>
             </div>
           </div>
