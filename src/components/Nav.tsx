@@ -16,16 +16,12 @@ export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">IE</span>
-            </div>
-            <span className="font-bold text-lg text-foreground tracking-tight">
-              Impact-Edu
-              <span className="text-primary-lighter">.ai</span>
+    <nav className="sticky top-0 z-50 bg-[#faf8f5]/95 backdrop-blur-sm border-b border-border">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-14">
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <span className="font-[family-name:var(--font-source-serif)] font-bold text-lg text-foreground tracking-tight">
+              Impact-Edu<span className="text-accent">.ai</span>
             </span>
           </Link>
 
@@ -35,10 +31,10 @@ export default function Nav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-3 py-1.5 rounded text-sm transition-colors ${
                   pathname === link.href
-                    ? "text-primary bg-indigo-50"
-                    : "text-muted hover:text-foreground hover:bg-surface"
+                    ? "text-foreground font-medium"
+                    : "text-muted hover:text-foreground"
                 }`}
               >
                 {link.label}
@@ -48,32 +44,31 @@ export default function Nav() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden p-2 rounded-lg text-muted hover:text-foreground hover:bg-surface"
+            className="md:hidden p-2 text-muted hover:text-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
               )}
             </svg>
           </button>
         </div>
 
-        {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden pb-4 border-t border-border">
+          <div className="md:hidden pb-3 border-t border-border mt-1">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className={`block px-3 py-2 mt-1 rounded-lg text-sm font-medium ${
+                className={`block px-3 py-2 text-sm ${
                   pathname === link.href
-                    ? "text-primary bg-indigo-50"
-                    : "text-muted hover:text-foreground hover:bg-surface"
+                    ? "text-foreground font-medium"
+                    : "text-muted hover:text-foreground"
                 }`}
               >
                 {link.label}

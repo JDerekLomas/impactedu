@@ -1,52 +1,77 @@
 import Hero from "@/components/Hero";
-import ProgramCard from "@/components/ProgramCard";
 import Link from "next/link";
 
-const programs = [
+const researchAreas = [
   {
-    title: "Open Research",
+    number: "01",
+    title: "Impact Research",
     description:
-      "Efficacy studies, equity analyses, and measurement frameworks — published openly for the entire field.",
-    color: "bg-indigo-100 text-indigo-600",
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-      </svg>
-    ),
+      "Efficacy studies, equity analyses, and measurement of what actually works when AI enters classrooms. Not vendor marketing — real evidence.",
+    examples: [
+      "LLM difficulty estimation across 200 experimental conditions (AIED 2026)",
+      "Measurable reduction in learning poverty via SmartPaper in Rajasthan",
+      "Large-scale A/B testing workshops at L@S (2020-2023)",
+    ],
   },
   {
-    title: "Open Tools & Infrastructure",
+    number: "02",
+    title: "Research Tools",
     description:
-      "Open-source datasets, reference implementations, and evaluation frameworks for AI in education.",
-    color: "bg-emerald-100 text-emerald-600",
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
+      "Open tools purpose-built for studying AI in education — adaptive assessments, AI-powered qualitative interviews, synthetic student simulation, item calibration.",
+    examples: [
+      "Adaptive testing with 34K+ CC-licensed items (MCQMCP)",
+      "AI interviews by text and voice for qualitative research",
+      "Synthetic student calibration for instant psychometric feedback",
+    ],
   },
   {
+    number: "03",
     title: "Practitioner Training",
     description:
-      "Professional development for teachers and districts to integrate AI effectively and responsibly.",
-    color: "bg-amber-100 text-amber-600",
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-      </svg>
-    ),
+      "Helping educators and districts make evidence-based decisions about AI tools — not adopt them fearfully or uncritically.",
+    examples: [
+      "AI Literacy Lab for hands-on practice",
+      "District-level AI integration planning",
+      "Train-the-trainer programs that scale through educator networks",
+    ],
   },
   {
-    title: "Field-Building & Convening",
+    number: "04",
+    title: "Field-Building",
     description:
-      "Connecting researchers, practitioners, developers, and policymakers to strengthen the AI-in-education ecosystem.",
-    color: "bg-rose-100 text-rose-600",
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-      </svg>
-    ),
+      "Connecting researchers, practitioners, developers, and policymakers. Convening the people who need to be in the same room.",
+    examples: [
+      "Annual convenings on AI in education",
+      "Working groups on assessment, equity, safety, efficacy",
+      "Policy briefs that translate research into guidance",
+    ],
+  },
+];
+
+const evidence = [
+  {
+    label: "SmartPaper",
+    description:
+      "Computer vision tool bridging paper and digital learning. Teachers print worksheets, students write by hand, AI scores instantly. Deployed across government schools in Rajasthan, India.",
+    stat: "5M+ student assessments",
+    detail: "6 longitudinal assessments, 120K item responses, UNESCO-recognized",
+    link: "https://www.getsmartpaper.com",
+  },
+  {
+    label: "PlayPower educational content",
+    description:
+      "Standards-aligned math content distributed by Savvas Learning to districts across the United States, with 25+ educational games and AI-generated curriculum.",
+    stat: "10M+ US students reached",
+    detail: "Via Savvas distribution partnership",
+    link: "https://playpowerlabs.com",
+  },
+  {
+    label: "UpGrade",
+    description:
+      "Open-source A/B testing platform for educational software, built on Carnegie Learning's infrastructure. Funded by the Gates Foundation and Schmidt Futures.",
+    stat: "Open source",
+    detail: "Gates Foundation + Schmidt Futures funded",
+    link: null,
   },
 ];
 
@@ -55,70 +80,144 @@ export default function Home() {
     <>
       <Hero />
 
-      {/* Problem statement */}
-      <section className="pt-10 pb-20 bg-surface">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
-              The AI gap in education is growing
-            </h2>
-            <p className="mt-6 text-lg text-muted leading-relaxed">
-              Well-funded schools adopt AI tutoring and personalized learning while under-resourced schools fall further behind. Educators lack the evidence base and training to make informed decisions. The field needs open research, open tools, and practitioner support — not more vendor marketing.
+      {/* The problem — field note style */}
+      <section className="py-16 bg-surface paper-texture">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <p className="font-[family-name:var(--font-jetbrains-mono)] text-xs uppercase tracking-wider text-muted mb-3">
+              The problem
             </p>
+            <h2 className="font-[family-name:var(--font-source-serif)] text-2xl sm:text-3xl font-bold text-foreground leading-snug">
+              AI is transforming education faster than we can measure its impact
+            </h2>
+            <div className="mt-4 space-y-3 text-muted leading-relaxed">
+              <p>
+                Well-funded schools adopt AI tools while under-resourced schools fall behind. Vendors make claims no one can verify. Educators make decisions without evidence. The gap between what AI <em>could</em> do for learning and what we <em>know</em> it does is enormous.
+              </p>
+              <p>
+                We need research infrastructure that moves as fast as the technology — open tools for measuring impact, not just building products.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Program areas */}
-      <section className="py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
-              Four program areas
-            </h2>
-            <p className="mt-4 text-lg text-muted max-w-2xl mx-auto">
-              Grounded in decades of learning science research, we work across four interconnected areas to ensure AI benefits every learner.
-            </p>
+      {/* Research areas */}
+      <section className="py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="font-[family-name:var(--font-jetbrains-mono)] text-xs uppercase tracking-wider text-muted mb-3">
+            What we do
+          </p>
+          <h2 className="font-[family-name:var(--font-source-serif)] text-2xl sm:text-3xl font-bold text-foreground leading-snug mb-10">
+            Four research and development areas
+          </h2>
+
+          <div className="space-y-8">
+            {researchAreas.map((area) => (
+              <div
+                key={area.number}
+                className="grid grid-cols-1 lg:grid-cols-[120px_1fr] gap-4 pb-8 border-b border-border last:border-0 last:pb-0"
+              >
+                <div className="font-[family-name:var(--font-jetbrains-mono)] text-sm text-muted-light">
+                  {area.number}
+                </div>
+                <div>
+                  <h3 className="font-[family-name:var(--font-source-serif)] text-xl font-semibold text-foreground mb-2">
+                    {area.title}
+                  </h3>
+                  <p className="text-muted leading-relaxed mb-3">{area.description}</p>
+                  <ul className="space-y-1">
+                    {area.examples.map((ex) => (
+                      <li key={ex} className="text-sm text-muted-light flex items-start gap-2">
+                        <span className="text-accent mt-1.5 text-[8px]">&#9679;</span>
+                        {ex}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {programs.map((program) => (
-              <ProgramCard key={program.title} {...program} />
+        </div>
+      </section>
+
+      {/* Evidence / track record */}
+      <section className="py-16 bg-surface paper-texture">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="font-[family-name:var(--font-jetbrains-mono)] text-xs uppercase tracking-wider text-muted mb-3">
+            Track record
+          </p>
+          <h2 className="font-[family-name:var(--font-source-serif)] text-2xl sm:text-3xl font-bold text-foreground leading-snug mb-3">
+            Built on a decade of shipped work
+          </h2>
+          <p className="text-muted leading-relaxed max-w-2xl mb-10">
+            Impact-Edu.ai draws on the research and engineering track record of its founding team — tools already in use by millions of students, backed by rigorous evidence.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {evidence.map((item) => (
+              <div
+                key={item.label}
+                className="bg-paper rounded-lg border border-border p-6 hover:border-accent/30 transition-colors"
+              >
+                <div className="font-[family-name:var(--font-source-serif)] text-2xl font-bold text-foreground mb-1">
+                  {item.stat}
+                </div>
+                <div className="font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-wider text-accent mb-3">
+                  {item.detail}
+                </div>
+                <h3 className="font-semibold text-foreground mb-1">{item.label}</h3>
+                <p className="text-sm text-muted leading-relaxed">{item.description}</p>
+                {item.link && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-block text-sm text-accent hover:text-accent-light transition-colors"
+                  >
+                    {item.link.replace("https://", "").replace("www.", "")} &rarr;
+                  </a>
+                )}
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Research heritage */}
-      <section className="py-20 bg-surface">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-sm font-medium text-primary-light mb-4">
-                Our foundation
-              </div>
-              <h2 className="text-3xl font-bold text-foreground tracking-tight">
-                Built on decades of learning science
+              <p className="font-[family-name:var(--font-jetbrains-mono)] text-xs uppercase tracking-wider text-muted mb-3">
+                Why us
+              </p>
+              <h2 className="font-[family-name:var(--font-source-serif)] text-2xl sm:text-3xl font-bold text-foreground leading-snug">
+                Moving at the speed of AI, grounded in learning science
               </h2>
-              <p className="mt-4 text-muted leading-relaxed">
-                Impact-Edu.ai is grounded in research from Carnegie Mellon&apos;s LearnLab and the Pittsburgh Science of Learning Center, which demonstrated that well-designed intelligent tutoring systems can dramatically improve student outcomes.
-              </p>
-              <p className="mt-4 text-muted leading-relaxed">
-                We bring this research tradition into the current AI moment — combining rigorous evidence with open tools and training that the whole field can use.
-              </p>
+              <div className="mt-4 space-y-3 text-muted leading-relaxed">
+                <p>
+                  Our team comes from Carnegie Mellon&apos;s LearnLab — where intelligent tutoring systems were pioneered — and has spent the last decade shipping AI-powered education tools at scale in the US and India.
+                </p>
+                <p>
+                  We combine the rigor of learning science research with the velocity of a startup. Funders get an organization that can publish in top venues <em>and</em> ship working tools to millions of students.
+                </p>
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+
+            <div className="space-y-4">
               {[
-                { label: "Program areas", value: "4", accent: "text-indigo-600" },
-                { label: "Focus", value: "Equity", accent: "text-amber-600" },
-                { label: "All research", value: "Open", accent: "text-emerald-600" },
-                { label: "All tools", value: "Open Source", accent: "text-rose-600" },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="bg-white rounded-2xl p-6 border border-border text-center hover:shadow-md transition-shadow"
-                >
-                  <div className={`text-3xl font-bold ${stat.accent}`}>{stat.value}</div>
-                  <div className="text-sm text-muted mt-1 font-medium">{stat.label}</div>
+                "PhD under Ken Koedinger at CMU (founder of intelligent tutoring)",
+                "75+ publications across CHI, AIED, EDM, L@S, JCAL",
+                "CHI Honorable Mention — 70K-subject experiment",
+                "Gates Foundation & Schmidt Futures funded tools",
+                "UNESCO-recognized assessment innovation",
+                "10M students reached in the US via Savvas partnership",
+                "5M student assessments in Indian government schools",
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-3 text-sm">
+                  <span className="text-accent mt-1 flex-shrink-0">&mdash;</span>
+                  <span className="text-muted">{item}</span>
                 </div>
               ))}
             </div>
@@ -127,26 +226,26 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-br from-[#1e1b4b] via-[#312e81] to-[#3730a3]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            Let&apos;s build a better future for AI in education
+      <section className="py-16 bg-surface border-t border-border">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-[family-name:var(--font-source-serif)] text-2xl sm:text-3xl font-bold text-foreground">
+            Interested in funding or partnering on impact research?
           </h2>
-          <p className="mt-4 text-lg text-indigo-200 max-w-2xl mx-auto">
-            Whether you&apos;re a researcher, educator, funder, or developer, there&apos;s a way to get involved.
+          <p className="mt-3 text-muted max-w-xl mx-auto">
+            We&apos;re looking for foundations, researchers, and school districts who want evidence — not hype — about AI in education.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center justify-center px-5 py-2.5 bg-foreground text-background text-sm font-medium rounded hover:bg-ink transition-colors"
             >
-              Get in Touch
+              Get in touch
             </Link>
             <Link
               href="/about"
-              className="inline-flex items-center justify-center px-6 py-3 border border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
+              className="inline-flex items-center justify-center px-5 py-2.5 border border-border text-foreground text-sm font-medium rounded hover:bg-surface-alt transition-colors"
             >
-              Learn More About Us
+              About us
             </Link>
           </div>
         </div>

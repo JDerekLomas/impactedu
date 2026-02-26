@@ -2,64 +2,59 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81]">
-      {/* Subtle dot pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.07]"
-        style={{
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-
-      {/* Gradient orbs */}
-      <div className="absolute top-10 right-1/4 w-[500px] h-[500px] bg-indigo-500/15 rounded-full blur-3xl" />
-      <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 right-0 w-64 h-64 bg-cyan-400/10 rounded-full blur-3xl" />
-
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
+    <section className="relative overflow-hidden dot-grid">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-sm text-indigo-200 mb-8">
-            <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
+          <p className="font-[family-name:var(--font-jetbrains-mono)] text-xs uppercase tracking-wider text-muted mb-6">
             A program of Wisdom Frontiers
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-bold text-white leading-[1.1] tracking-tight">
-            AI should work for{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400">
-              every learner
-            </span>
-          </h1>
-
-          <p className="mt-6 text-lg sm:text-xl text-indigo-200/90 leading-relaxed max-w-2xl">
-            We advance equitable access to AI-powered learning through open research, open-source tools, and practitioner training — so every educator and learner benefits from advances in artificial intelligence.
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-4">
+          <h1 className="font-[family-name:var(--font-source-serif)] text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-foreground leading-[1.15] tracking-tight">
+            Researching what works{" "}
+            <span className="underline-accent">when AI meets education</span>
+          </h1>
+
+          <p className="mt-6 text-lg text-muted leading-relaxed max-w-2xl">
+            Impact-Edu.ai conducts and funds research on AI&apos;s real impact in classrooms, and builds open tools for that research — adaptive assessments, AI interviews, measurement frameworks. Moving at the speed of AI, grounded in learning science.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Link
               href="/programs"
-              className="inline-flex items-center justify-center px-7 py-3.5 bg-white text-[#1e1b4b] font-semibold rounded-xl hover:bg-gray-50 transition-all shadow-lg shadow-black/10 hover:shadow-xl hover:shadow-black/15"
+              className="inline-flex items-center justify-center px-5 py-2.5 bg-foreground text-background text-sm font-medium rounded hover:bg-ink transition-colors"
             >
-              Our Programs
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+              Our research areas
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-7 py-3.5 border border-white/25 text-white font-semibold rounded-xl hover:bg-white/10 transition-all backdrop-blur-sm"
+              className="inline-flex items-center justify-center px-5 py-2.5 border border-border text-foreground text-sm font-medium rounded hover:bg-surface transition-colors"
             >
-              Get Involved
+              Partner with us
             </Link>
           </div>
         </div>
-      </div>
 
-      {/* Wave divider */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block" preserveAspectRatio="none">
-          <path d="M0 60V30C240 10 480 0 720 10C960 20 1200 40 1440 30V60H0Z" fill="var(--surface)" />
-        </svg>
+        {/* Field note stats strip */}
+        <div className="mt-16 pt-8 border-t border-border">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+            {[
+              { value: "15M+", label: "students reached", note: "US + India" },
+              { value: "75+", label: "publications", note: "CHI, AIED, EDM, L@S" },
+              { value: "5M", label: "assessments via SmartPaper", note: "Rajasthan, India" },
+              { value: "$25", label: "for a full K-12 curriculum", note: "AI content generation" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <div className="font-[family-name:var(--font-source-serif)] text-2xl sm:text-3xl font-bold text-foreground">
+                  {stat.value}
+                </div>
+                <div className="text-sm text-muted mt-0.5">{stat.label}</div>
+                <div className="font-[family-name:var(--font-jetbrains-mono)] text-[10px] text-muted-light mt-1 uppercase tracking-wider">
+                  {stat.note}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

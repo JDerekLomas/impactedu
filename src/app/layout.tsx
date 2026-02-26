@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Source_Serif_4, JetBrains_Mono } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -9,17 +9,29 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
 export const metadata: Metadata = {
   title: {
-    default: "Impact-Edu.ai — AI for Every Learner",
+    default: "Impact-Edu.ai — Research & Tools for AI in Education",
     template: "%s | Impact-Edu.ai",
   },
   description:
-    "Impact-Edu.ai advances equitable access to AI-powered learning through open research, open-source tools, and practitioner training.",
+    "Impact-Edu.ai conducts and funds research on AI's impact in education, and builds open tools for that research. A program of Wisdom Frontiers.",
   openGraph: {
-    title: "Impact-Edu.ai — AI for Every Learner",
+    title: "Impact-Edu.ai — Research & Tools for AI in Education",
     description:
-      "Open research, open tools, and practitioner training for AI in education.",
+      "Open research, open tools, and practitioner training for equitable AI in education.",
     url: "https://impact-edu.ai",
     siteName: "Impact-Edu.ai",
     type: "website",
@@ -33,7 +45,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
+      <body
+        className={`${inter.variable} ${sourceSerif.variable} ${jetbrainsMono.variable} antialiased`}
+      >
         <Nav />
         <main className="min-h-screen">{children}</main>
         <Footer />
