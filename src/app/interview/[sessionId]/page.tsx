@@ -89,29 +89,24 @@ export default function InterviewPage() {
       let accumulated = "";
 
       if (reader) {
+        let buffer = "";
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
 
-          const chunk = decoder.decode(value, { stream: true });
-          const lines = chunk.split("\n");
+          buffer += decoder.decode(value, { stream: true });
 
-          for (const line of lines) {
-            if (line.startsWith("data: ")) {
-              const data = line.slice(6);
+          // Process complete lines only (SSE lines end with \n\n)
+          const parts = buffer.split("\n");
+          // Keep the last part as it may be incomplete
+          buffer = parts.pop() || "";
+
+          for (const line of parts) {
+            const trimmed = line.trim();
+            if (trimmed.startsWith("data: ")) {
+              const data = trimmed.slice(6);
               if (data === "[DONE]") {
-                // Add the complete assistant message
-                setMessages((prev) => [
-                  ...prev,
-                  {
-                    id: crypto.randomUUID(),
-                    role: "assistant",
-                    content: accumulated,
-                    created_at: new Date().toISOString(),
-                  },
-                ]);
-                setStreamingText("");
-                accumulated = "";
+                // handled below after loop
               } else {
                 try {
                   const parsed = JSON.parse(data);
@@ -123,6 +118,20 @@ export default function InterviewPage() {
               }
             }
           }
+        }
+
+        // Stream ended — finalize the message
+        if (accumulated) {
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: crypto.randomUUID(),
+              role: "assistant",
+              content: accumulated,
+              created_at: new Date().toISOString(),
+            },
+          ]);
+          setStreamingText("");
         }
       }
     } catch (err) {
@@ -153,15 +162,18 @@ export default function InterviewPage() {
         let accumulated = "";
 
         if (reader) {
+          let buffer = "";
           while (true) {
             const { done, value } = await reader.read();
             if (done) break;
-            const chunk = decoder.decode(value, { stream: true });
-            const lines = chunk.split("\n");
-            for (const line of lines) {
-              if (line.startsWith("data: ") && line.slice(6) !== "[DONE]") {
+            buffer += decoder.decode(value, { stream: true });
+            const parts = buffer.split("\n");
+            buffer = parts.pop() || "";
+            for (const line of parts) {
+              const trimmed = line.trim();
+              if (trimmed.startsWith("data: ") && trimmed.slice(6) !== "[DONE]") {
                 try {
-                  const parsed = JSON.parse(line.slice(6));
+                  const parsed = JSON.parse(trimmed.slice(6));
                   accumulated += parsed.text;
                   setStreamingText(accumulated);
                 } catch {
@@ -172,16 +184,18 @@ export default function InterviewPage() {
           }
         }
 
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: crypto.randomUUID(),
-            role: "assistant",
-            content: accumulated,
-            created_at: new Date().toISOString(),
-          },
-        ]);
-        setStreamingText("");
+        if (accumulated) {
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: crypto.randomUUID(),
+              role: "assistant",
+              content: accumulated,
+              created_at: new Date().toISOString(),
+            },
+          ]);
+          setStreamingText("");
+        }
       }
 
       // Mark session as completed
