@@ -59,12 +59,12 @@ const evidence = [
     link: "https://www.getsmartpaper.com",
   },
   {
-    label: "PlayPower educational content",
+    label: "PlayPower educational platform",
     description:
-      "Standards-aligned math content distributed by Savvas Learning to districts across the United States, with 25+ educational games and AI-generated curriculum.",
+      "50+ free math games for K-8, 45 high school quests, AI teacher tools, reading tools, and adaptive curricula — distributed by Savvas Learning and free at playpowergames.com.",
     stat: "10M+ US students reached",
-    detail: "Via Savvas distribution partnership",
-    link: "https://playpowerlabs.com",
+    detail: "Free games + Savvas distribution",
+    link: "https://playpowergames.com",
   },
   {
     label: "UpGrade",
