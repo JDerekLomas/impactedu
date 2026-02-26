@@ -6,20 +6,20 @@ import Link from "next/link";
 
 const evidence = [
   {
+    label: "Open Items",
+    description:
+      "Open assessment infrastructure for K-12. 34K+ CC-licensed items, AI generation, LLM evaluation, adaptive practice — built on the Learning Commons Knowledge Graph.",
+    stat: "34K+ open items",
+    detail: "CC-licensed, standards-aligned",
+    link: "https://openitems.impact-edu.ai",
+  },
+  {
     label: "SmartPaper",
     description:
       "Computer vision for paper-to-digital assessment. Teachers print, students write by hand, AI scores instantly. Deployed across government schools in Rajasthan, India.",
     stat: "5M+ assessments",
     detail: "UNESCO-recognized",
     link: "https://www.getsmartpaper.com",
-  },
-  {
-    label: "PlayPower",
-    description:
-      "50+ free K-8 math games, 45 high school quests, AI teacher tools — distributed by Savvas Learning to schools nationwide.",
-    stat: "10M+ students reached",
-    detail: "Free + Savvas distribution",
-    link: "https://playpowergames.com",
   },
 ];
 

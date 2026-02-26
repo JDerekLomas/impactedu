@@ -28,16 +28,16 @@ const programs = [
     title: "Research Tools",
     tagline: "Open infrastructure for studying AI in education",
     description:
-      "We build and maintain open-source tools purpose-built for education research — adaptive assessments, AI-powered qualitative interviews, synthetic student simulation, item calibration, and measurement infrastructure.",
+      "We build and maintain open-source tools purpose-built for education research — anchored by Open Items, our open assessment platform built on the CZI Learning Commons Knowledge Graph.",
     items: [
-      "Adaptive testing platform with 34K+ CC-licensed assessment items",
+      "Open Items: 34K+ CC-licensed assessment items with AI generation, LLM evaluation, and adaptive practice (openitems.impact-edu.ai)",
+      "Built on the Learning Commons Knowledge Graph — 250K standards, 2K learning components, 273K relationships",
+      "LLM-as-Judge evaluation pipeline scoring on 5 dimensions with 85% auto-approve rate",
       "AI interview tools for qualitative research — text and voice",
       "Synthetic student simulation for instant psychometric feedback on new items",
-      "Open datasets for training and evaluating educational AI",
-      "Evaluation frameworks that help educators and districts assess AI tool quality",
       "UpGrade: open-source A/B testing for education (Gates Foundation + Schmidt Futures)",
     ],
-    evidence: "Full K-12 curriculum content generation at $25-50 total cost. 85% auto-approve rate with 98% mathematical accuracy.",
+    evidence: "Full K-12 curriculum content generation at $25-50 total cost. 98% mathematical accuracy. First applied project built on the Learning Commons Knowledge Graph.",
   },
   {
     number: "03",

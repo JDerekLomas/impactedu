@@ -11,6 +11,28 @@ export const metadata: Metadata = {
 const projects = [
   {
     number: "01",
+    title: "Open Items",
+    tagline: "Open assessment infrastructure for K-12 education",
+    description:
+      "The open applied layer on top of open education infrastructure. 34K+ CC-licensed assessment items with AI generation, LLM evaluation, adaptive practice, and 18 interactive math widgets — built on the CZI Learning Commons Knowledge Graph. The first serious applied project demonstrating what's possible when you build openly on shared infrastructure.",
+    stats: [
+      { value: "34K+", label: "CC-licensed assessment items" },
+      { value: "18", label: "interactive math widgets" },
+      { value: "250K", label: "standards via Knowledge Graph" },
+    ],
+    details: [
+      "Built on the CZI Learning Commons Knowledge Graph (250K standards, 2K learning components, 273K relationships)",
+      "LLM-as-Judge evaluation pipeline: 5-dimension scoring, 85% auto-approve rate, 98% mathematical accuracy",
+      "9 item types: multiple choice, multiple select, T/F, short answer, numeric, essay, cloze, matching, ordering",
+      "AI content generation using Gemini 3 Flash — full K-12 curriculum at $25-50 total cost",
+      "Adaptive practice with Elo-rated difficulty calibration",
+      "PDF worksheet generation with interactive widget renderers",
+      "REST API and embeddable SDKs for integration by other tools",
+    ],
+    link: "https://openitems.impact-edu.ai",
+  },
+  {
+    number: "02",
     title: "SmartPaper",
     tagline: "Bridging paper and digital learning at national scale",
     description:
@@ -29,46 +51,23 @@ const projects = [
     link: "https://www.getsmartpaper.com",
   },
   {
-    number: "02",
-    title: "PlayPower Educational Platform",
-    tagline: "Free games, quests, teacher AI tools, and adaptive curricula for K-12",
+    number: "03",
+    title: "PlayPower",
+    tagline: "Free games, quests, and AI tools reaching 10M+ students",
     description:
-      "A comprehensive educational platform spanning free math games for K-8, guided quests for every major high school topic, AI-powered teacher tools, reading tools, and adaptive math curricula. Distributed by Savvas Learning to school districts across the US, with a free public games site at playpowergames.com.",
+      "50+ free K-8 math games, 45 high school quests, AI teacher tools — distributed by Savvas Learning to schools nationwide. The commercial track record that demonstrated the need for open infrastructure.",
     stats: [
       { value: "50+", label: "free math games (K-8)" },
       { value: "45", label: "high school quests" },
       { value: "10M+", label: "US students reached" },
     ],
     details: [
-      "playpowergames.com: free games covering half of K-8 math topics, in English and Spanish",
-      "45 guided quests supporting every major high school math topic",
-      "Teacher AI tools: lesson planning, activity planning, worksheet creation, text leveling",
-      "AI reading tools and adaptive math curricula",
       "Distributed by Savvas Learning (one of the largest US K-12 publishers)",
-      "AI-generated curriculum at $25-50 total cost with 98% mathematical accuracy",
-      "Building lightweight supplements: 3D models, interactives, paper-based adaptive assessments",
+      "Free games at playpowergames.com covering half of K-8 math topics, English and Spanish",
+      "Teacher AI tools: lesson planning, activity planning, worksheet creation, text leveling",
+      "Experience building at scale informed the design of Open Items",
     ],
     link: "https://playpowergames.com",
-  },
-  {
-    number: "03",
-    title: "Open Assessment Items (MCQMCP)",
-    tagline: "34,000+ CC-licensed items with psychometric data",
-    description:
-      "A growing bank of openly licensed assessment items spanning K-12 mathematics — one of the largest open collections of its kind. Each item includes difficulty estimates, discrimination parameters, and alignment data. Built for adaptive testing, research, and anyone who needs high-quality assessment items without licensing barriers.",
-    stats: [
-      { value: "34K+", label: "CC-licensed assessment items" },
-      { value: "K-12", label: "mathematics coverage" },
-      { value: "Open", label: "psychometric data included" },
-    ],
-    details: [
-      "Creative Commons licensed — free for any use",
-      "Item-level psychometric data (difficulty, discrimination, alignment)",
-      "Supports adaptive testing and research applications",
-      "Synthetic student simulation for instant calibration feedback on new items",
-      "One of the largest open assessment item banks available",
-    ],
-    link: null,
   },
   {
     number: "04",
@@ -208,7 +207,7 @@ export default function WorkPage() {
                   </div>
 
                   {/* Project image */}
-                  {project.number === "01" && (
+                  {project.number === "02" && (
                     <div className="mt-5 rounded-lg overflow-hidden border border-border">
                       <Image
                         src="/images/smartpaper-project.jpg"
@@ -219,11 +218,11 @@ export default function WorkPage() {
                       />
                     </div>
                   )}
-                  {project.number === "02" && (
+                  {project.number === "03" && (
                     <div className="mt-5 rounded-lg overflow-hidden border border-border">
                       <Image
                         src="/images/playpower-project.png"
-                        alt="PlayPower Labs — next-generation learning products"
+                        alt="PlayPower — free math games and AI teacher tools"
                         width={800}
                         height={400}
                         className="w-full h-auto"
