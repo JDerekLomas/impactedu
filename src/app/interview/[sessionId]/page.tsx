@@ -135,8 +135,8 @@ export default function InterviewPage() {
       setSessionStatus(data.session.status);
       studyDataRef.current = data.session.interview_studies;
 
-      // If session already has messages, go straight to text mode
-      if (data.messages.length > 0) {
+      // Only auto-resume text mode if session is not active (shouldn't happen now)
+      if (data.session.status !== "active" && data.messages.length > 0) {
         setMode("text");
       }
     } catch {
