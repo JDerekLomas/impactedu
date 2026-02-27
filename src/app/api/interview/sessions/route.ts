@@ -94,9 +94,11 @@ export async function GET(request: NextRequest) {
 
   const supabase = createServiceClient();
 
+  const showAll = searchParams.get("all") === "true";
+
   const { data: session, error } = await supabase
     .from("interview_sessions")
-    .select("*, interview_studies(title, research_goals)")
+    .select("*, interview_studies(title, research_goals, interview_guide, system_prompt)")
     .eq("id", id)
     .single();
 
@@ -110,10 +112,11 @@ export async function GET(request: NextRequest) {
     .eq("session_id", id)
     .order("created_at", { ascending: true });
 
-  // Filter out the system-level initial message
-  const visibleMessages = (messages || []).filter(
-    (m) => m.role !== "user" || !m.content.startsWith("[")
-  );
+  const visibleMessages = showAll
+    ? (messages || [])
+    : (messages || []).filter(
+        (m) => m.role !== "user" || !m.content.startsWith("[")
+      );
 
   return NextResponse.json({ session, messages: visibleMessages });
 }

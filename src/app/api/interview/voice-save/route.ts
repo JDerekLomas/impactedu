@@ -45,11 +45,5 @@ export async function POST(request: NextRequest) {
     return Response.json({ error: "Failed to save", details: insertErr.message }, { status: 500 });
   }
 
-  // Mark session completed
-  await supabase
-    .from("interview_sessions")
-    .update({ status: "completed" })
-    .eq("id", session_id);
-
   return Response.json({ saved: messages.length });
 }

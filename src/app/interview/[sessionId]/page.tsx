@@ -228,7 +228,6 @@ ${guide}
 
   async function endVoiceSession() {
     await conversation.endSession();
-    setSessionStatus("completed");
   }
 
   const saveVoiceTranscript = useCallback(async () => {
@@ -384,12 +383,6 @@ ${guide}
           setStreamingText("");
         }
       }
-
-      await fetch(`/api/interview/sessions?id=${sessionId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "completed" }),
-      });
 
       setSessionStatus("completed");
     } catch (err) {
