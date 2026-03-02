@@ -94,18 +94,26 @@ The following relationships are disclosed as of the adoption of this policy and 
 ### Derek Lomas, PhD — Program Director, Impact-Edu.ai
 
 **Disclosed financial interests:**
-- Principal and [owner/equity holder] of Play Power Labs, [Inc./LLC], a for-profit company that develops and sells commercial AI-powered educational products and services.
+- Principal and [owner/equity holder] of PlayPower Labs Pvt. Ltd., a for-profit company incorporated in Gujarat, India, that provides commercial edtech consulting, data science, and software development services.
+- Holder of approximately 40% equity in EdOptimize (operating as Smart Paper), a for-profit company incorporated in India that develops and operates an AI-powered paper assessment digitization platform. EdOptimize was founded by Nirmal Patel, who previously developed the Smart Paper technology while serving as Chief Data Scientist at PlayPower Labs. PlayPower Labs has granted the Smart Paper intellectual property to EdOptimize.
 
-**Management of this conflict:**
-1. Dr. Lomas shall recuse himself from any board vote involving a transaction or arrangement between Wisdom Frontiers (including the Impact-Edu.ai program) and Play Power Labs.
-2. Any contract, license, or payment between Wisdom Frontiers and Play Power Labs must be (a) at fair market value, (b) documented in writing, (c) approved by a majority of disinterested board members after review of comparable market rates.
-3. Grant funds received for the Impact-Edu.ai program shall not be used to purchase proprietary products or services from Play Power Labs unless such purchase is (a) essential to the program's charitable mission, (b) at or below fair market value, and (c) approved per the procedures above.
-4. Intellectual property created with Impact-Edu.ai program funds shall be owned by Wisdom Frontiers and made available under open licenses (open source, Creative Commons, or equivalent). Such IP shall not become the proprietary property of Play Power Labs.
-5. Dr. Lomas shall provide an updated disclosure statement annually, or whenever his financial interests materially change.
+**Relationship between the disclosed entities:**
+PlayPower Labs and EdOptimize are separate companies with separate management. Nirmal Patel is CEO of EdOptimize. Dr. Lomas does not hold an operational role at EdOptimize. The two companies have a commercial partnership involving co-marketing, joint bidding on government contracts, and engineering support arrangements. Dr. Lomas' equity interest in EdOptimize was received as consideration for PlayPower Labs' assignment of the Smart Paper IP to EdOptimize.
+
+**Management of these conflicts:**
+1. Dr. Lomas shall recuse himself from any board vote involving a transaction or arrangement between Wisdom Frontiers (including the Impact-Edu.ai program) and PlayPower Labs or EdOptimize.
+2. Any contract, license, or payment between Wisdom Frontiers and PlayPower Labs or EdOptimize must be (a) at fair market value, (b) documented in writing, (c) approved by a majority of disinterested board members after review of comparable market rates.
+3. Grant funds received for the Impact-Edu.ai program shall not be used to purchase proprietary products or services from PlayPower Labs or EdOptimize unless such purchase is (a) essential to the program's charitable mission, (b) at or below fair market value, and (c) approved per the procedures above.
+4. Intellectual property created with Impact-Edu.ai program funds shall be owned by Wisdom Frontiers and made available under open licenses (open source, Creative Commons, or equivalent). Such IP shall not become the proprietary property of PlayPower Labs or EdOptimize.
+5. If Impact-Edu.ai research involves Smart Paper data, deployments, or infrastructure, the engagement must be governed by a written data sharing agreement with appropriate participant consent and privacy protections, and approved by a majority of disinterested board members.
+6. Dr. Lomas shall provide an updated disclosure statement annually, or whenever his financial interests in PlayPower Labs, EdOptimize, or any related entity materially change.
+
+**Governing policies:**
+The relationships between Wisdom Frontiers, PlayPower Labs, and EdOptimize are further governed by the Relationship Policy: Wisdom Frontiers / Impact-Edu.ai and PlayPower Labs Pvt. Ltd. (adopted [DATE]), which establishes detailed rules for intellectual property, contracting, personnel, financial separation, and board governance.
 
 **Board acknowledgment:**
 
-The Board of Directors has reviewed this disclosure and determined that Dr. Lomas' involvement as Program Director of Impact-Edu.ai serves the organization's charitable mission, provided the conflict management procedures above are followed.
+The Board of Directors has reviewed these disclosures and determined that Dr. Lomas' involvement as Program Director of Impact-Edu.ai serves the organization's charitable mission, provided the conflict management procedures above are followed.
 
 ---
 
